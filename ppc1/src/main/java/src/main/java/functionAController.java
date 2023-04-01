@@ -15,6 +15,7 @@ public class functionAController {
 
     @FXML
     private TextField Cap_Grape;
+    
 
     @FXML
     private TextField Cap_Labor;
@@ -165,7 +166,7 @@ public class functionAController {
     }
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
-
+    	
 
     }
 
