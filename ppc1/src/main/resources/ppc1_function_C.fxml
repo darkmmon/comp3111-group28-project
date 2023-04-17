@@ -40,7 +40,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="581.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.functionAController">
+<VBox prefHeight="581.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.functionCController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
