@@ -139,7 +139,7 @@ public class functionCController {
 
     }
     public void initialize() {
-        Num_Week.textProperty().addListener(new ChangeListener<String>() {
+        /*Num_Week.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
@@ -162,7 +162,7 @@ public class functionCController {
                     Num_Week.setText("");
                 }
             }
-        });
+        });*/
     }
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
