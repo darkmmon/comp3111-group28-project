@@ -40,7 +40,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="581.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.functionAController">
+<VBox prefHeight="581.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.functionBController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -83,15 +83,15 @@
     </MenuBar>
     <AnchorPane fx:id="label_col_heading2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="519.0" prefWidth="788.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="Num_Week" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Num_Week" />
+            <TextField fx:id="WeekOfYear" layoutX="222.0" layoutY="95.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="WeekOfYear" />
             <Label fx:id="data_input_heading1" layoutX="143.0" layoutY="59.0" text="DATA INPUT" />
             <Label fx:id="data_input_caption2a" layoutX="133.0" layoutY="147.0" text="Labor (minutes)" />
-            <Label fx:id="form_heading1" layoutX="230.0" layoutY="8.0" text="A2.2.A Annual Forecast by Gross Profit">
+            <Label fx:id="form_heading1" layoutX="230.0" layoutY="8.0" text="A2.2.B Weekly Review by Revenue">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="data_input_caption1" layoutX="44.0" layoutY="99.0" text="Number of weeks (&lt;16):" />
+            <Label fx:id="data_input_caption1" layoutX="44.0" layoutY="99.0" text="Week of Harvest Year (&lt;2315):" />
             <TextField fx:id="Cap_Labor" layoutX="222.0" layoutY="143.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Labor" />
             <Label fx:id="data_input_caption2" layoutX="43.0" layoutY="128.0" text="Capacity Of:" />
             <Label fx:id="data_input_caption2b" layoutX="154.0" layoutY="174.0" text="Grape (Kgs)" />
@@ -101,8 +101,6 @@
             <TextField fx:id="Prc_Rose" layoutX="221.0" layoutY="216.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Prc_Rose" />
             <Label fx:id="data_input_caption3b" layoutX="126.0" layoutY="248.0" text="P-Noir (A$/Litre)" />
             <TextField fx:id="Prc_Noir" layoutX="221.0" layoutY="244.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Prc_Noir" />
-            <Label fx:id="data_input_caption4" layoutX="41.0" layoutY="284.0" text="Total fixed costs of the year (A$): " />
-            <TextField fx:id="Fixed_Costs" layoutX="222.0" layoutY="281.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Fixed_Costs" />
             <Label fx:id="opt_result_heading1" layoutX="552.0" layoutY="59.0" text="OPTIMIZED RESULT" />
             <Button fx:id="button_run1" layoutX="357.0" layoutY="138.0" mnemonicParsing="false" onAction="#toclick" prefHeight="35.0" prefWidth="79.0" style="-fx-background-color: green;" text="RUN ==&gt;" textFill="#f2e538">
                <font>
