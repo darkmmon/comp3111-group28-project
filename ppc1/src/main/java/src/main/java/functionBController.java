@@ -16,12 +16,8 @@ public class functionBController {
     @FXML
     private TextField Cap_Grape;
     
-
     @FXML
     private TextField Cap_Labor;
-
-    @FXML
-    private TextField Fixed_Costs;
 
     @FXML
     private Line HLine2;
@@ -36,7 +32,7 @@ public class functionBController {
     private Line HLine_1;
 
     @FXML
-    private TextField Num_Week;
+    private TextField WeekOfYear;
 
     @FXML
     private TextField Prc_Noir;
@@ -111,6 +107,9 @@ public class functionBController {
     private Label opt_r_caption3;
 
     @FXML
+    private Label opt_r_caption4;
+    
+    @FXML
     private Label opt_result_heading1;
 
     @FXML
@@ -126,7 +125,10 @@ public class functionBController {
     private TextField or_Prod_Vol_Total;
 
     @FXML
-    private TextField or_Profit_Margin;
+    private TextField or_Sur_Labor;
+    
+    @FXML
+    private TextField or_Sur_Grape;
 
     @FXML
     private Spinner<String> or_scroll_text1;
@@ -139,17 +141,17 @@ public class functionBController {
 
     }
     public void initialize() {
-        Num_Week.textProperty().addListener(new ChangeListener<String>() {
+        WeekOfYear.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue) || 15 < Integer.parseInt(newValue)) {
+                    if (2301 > Integer.parseInt(newValue) || 2315 < Integer.parseInt(newValue)) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0 and less than 15");
+                        alert.setContentText("Please enter an integer greater than 2301 and less than 2315");
                         alert.showAndWait();
-                        Num_Week.setText("");
+                        WeekOfYear.setText("");
                     } else {
 
                     }
@@ -157,9 +159,9 @@ public class functionBController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0 and less than 15");
+                    alert.setContentText("Please enter the number greater than 2301 and less than 2315");
                     alert.showAndWait();
-                    Num_Week.setText("");
+                    WeekOfYear.setText("");
                 }
             }
         });
