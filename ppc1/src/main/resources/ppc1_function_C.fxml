@@ -100,7 +100,7 @@
             <Label fx:id="data_input_caption2a" layoutX="133.0" layoutY="147.0" text="Labor (minutes)" />
             <TextField fx:id="Cap_Labor" layoutX="222.0" layoutY="143.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Labor" />
     		<Label fx:id="data_input_caption2b" layoutX="154.0" layoutY="174.0" text="Grape (Kgs)" />
-            <TextField fx:id="Cap_Grape" layoutX="222.0" layoutY="170.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Grade" />
+            <TextField fx:id="Cap_Grape" layoutX="222.0" layoutY="170.0" onInputMethodTextChanged="#getDefaultValue" prefHeight="25.0" prefWidth="99.0" promptText="Cap_Grape" />
             
             <Label fx:id="data_input_caption3" layoutX="42.0" layoutY="194.0" text="Price of Product:" />
             <Label fx:id="data_input_caption3a" layoutX="136.0" layoutY="220.0" text="Rose (A$/Litre)" />
