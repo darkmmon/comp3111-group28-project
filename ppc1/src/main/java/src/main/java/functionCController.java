@@ -10,7 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
-import java.util.regex.Pattern;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 
 public class functionCController {
@@ -408,13 +409,22 @@ public class functionCController {
     	}
     	
     	//or_Prod_Vol_Rose
-    	or_Prod_Vol_Rose.setText(Integer.toString(Opt_Rose));
+    	//or_Prod_Vol_Rose.setText(Integer.toString(Opt_Rose));
+    	
+    	Locale locale = Locale.getDefault();
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+        String formattedOpt_Rose = numberFormat.format(Opt_Rose);
+        or_Prod_Vol_Rose.setText(formattedOpt_Rose);
     	//or_Prod_Vol_Noir
-    	or_Prod_Vol_Noir.setText(Integer.toString(Opt_Noir));
+        String formattedOpt_Noir = numberFormat.format(Opt_Noir);
+    	or_Prod_Vol_Noir.setText(formattedOpt_Noir);
     	//or_Prod_Vol_Total
-    	or_Prod_Vol_Total.setText(Integer.toString(Opt_Rose + Opt_Noir));
+    	int Total = Opt_Rose + Opt_Noir;
+    	String formattedTotal = numberFormat.format(Total);
+    	or_Prod_Vol_Total.setText(formattedTotal);
     	//or_Revenue
-    	or_Revenue.setText(Integer.toString(Opt_Revenue));
+    	String formattedRevenue = numberFormat.format(Opt_Revenue);
+    	or_Revenue.setText(formattedRevenue);
     	//or_Backorder_Fulfilment
     	if (Bko_fulfill) {
     		or_Backorder_Fulfilment.setText("YES");
