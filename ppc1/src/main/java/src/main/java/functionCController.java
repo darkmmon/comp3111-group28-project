@@ -422,11 +422,29 @@ public class functionCController {
     		or_Backorder_Fulfilment.setText("NO");
     	}
     	
-    	ObservableList<String> items = FXCollections.observableArrayList(
-    			"w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volum!",
-    			"w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!",
-    			"w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!"
-    	);
+    	int Surplus_grape = Capacity_Grape - Opt_Rose * 6 - Opt_Noir * 4;
+		if (Surplus_grape < 4) {
+			Surplus_grape = 0;
+		}
+		
+		String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volum!";
+		String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
+    	String W3 = "W3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!";	
+		
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	
+    	if ( Opt_Rose + Opt_Noir > 5000 ) {
+    		items.add(W1);
+    	}
+    	
+    	if ( Surplus_grape * 100 / Capacity_Grape > 10 ) {
+    		items.add(W2);
+    	}
+    	
+    	if ( Backorder_Rose + Backorder_Noir < ( Opt_Rose + Opt_Noir ) * 0.7 ) {
+    		items.add(W3);
+    	}
+    			
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     	
     }
