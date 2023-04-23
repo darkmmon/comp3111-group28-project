@@ -142,6 +142,12 @@ public class functionCController {
     @FXML
     private TextField Bko_Noir;
     
+    @FXML
+    private TextField or_Revenue;
+    
+    @FXML
+    private TextField or_Backorder_Fulfilment;
+    
     
 
     @FXML
@@ -233,7 +239,7 @@ public class functionCController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	//Pattern pattern = Pattern.compile("^([1-9]\\d{0,3}(\\.\\d{1,2})?|9999\\.99)$");
                 try {
-                    if (Float.parseFloat(newValue) < 1.00 || Float.parseFloat(newValue) >= 10000.00) { 
+                    if (Double.parseDouble(newValue) < 1.00 || Double.parseDouble(newValue) >= 10000.00) { 
                     	Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 		alert.setTitle("error");
                 		alert.setHeaderText("input error");
@@ -265,7 +271,7 @@ public class functionCController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	//Pattern pattern = Pattern.compile("^([1-9]\\d{0,3}(\\.\\d{1,2})?|9999\\.99)$");
                 try {
-                    if (Float.parseFloat(newValue) < 1.00 || Float.parseFloat(newValue) >= 10000.00) { 
+                    if (Double.parseDouble(newValue) < 1.00 || Double.parseDouble(newValue) >= 10000.00) { 
                     	Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 		alert.setTitle("error");
                 		alert.setHeaderText("input error");
@@ -352,7 +358,76 @@ public class functionCController {
     }
 
     public void toclick(ActionEvent actionEvent) {
-        ObservableList<String> items = FXCollections.observableArrayList("w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!", "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).");
+        
+    	int Opt_Rose = 0;		//Number of litres to be produced for Rosé 
+    	int Opt_Noir = 0;		//Number of litres to be produced for Noir
+    	int Opt_Revenue = 0;	//Optimized Sales Revenue 
+    	Boolean Bko_fulfill = false;	//Sufficient resource of labor and grape to produce backorders of Bko_Rosé + Bko_Noir
+    	
+    	int Capacity_Labor = Integer.parseInt(Cap_Labor.getText());		//Labor resource planned for the production cycle (min)
+    	int Capacity_Grape = Integer.parseInt(Cap_Grape.getText());		//Grape resource planned for the production cycle (kg)
+    	double Price_Rose = Double.parseDouble(Prc_Rose.getText());		//Price of Rose (A$)
+    	double Price_Noir = Double.parseDouble(Prc_Noir.getText());		//Price of Noir (A$)
+    	int Backorder_Rose = Integer.parseInt(Bko_Rose.getText());		//Backorder volume of Rosé (L)
+    	int Backorder_Noir = Integer.parseInt(Bko_Noir.getText());		//Backorder volume of Noir (L)
+    	
+    	int Bko_Rose_Labor = Backorder_Rose * 5;	//5 mins of labor per L
+    	int Bko_Rose_Grape = Backorder_Rose * 6;	//6 kg of grapes per L
+    	int Bko_Noir_Labor = Backorder_Noir * 12;	//12 mins of labor per L
+    	int Bko_Noir_Grape = Backorder_Noir * 4;	//4 kg of grapes per L
+    	
+    	Boolean Bko_fulfill_labor = false;
+    	Boolean Bko_fulfill_grape = false;
+    	if (Capacity_Labor >= Bko_Rose_Labor + Bko_Noir_Labor) {
+    		Bko_fulfill_labor = true;
+    	}
+    	if (Capacity_Grape >= Bko_Rose_Grape + Bko_Noir_Grape) {
+    		Bko_fulfill_grape = true;
+    	}
+    	
+    	if (Bko_fulfill_labor && Bko_fulfill_grape) {
+    		Bko_fulfill = true;
+    	}
+    	
+    	if (Bko_fulfill) {
+    		Capacity_Labor = Capacity_Labor - ( Bko_Rose_Labor + Bko_Noir_Labor );
+    		Capacity_Grape = Capacity_Grape - ( Bko_Rose_Grape + Bko_Noir_Grape );
+    	}
+    	
+    	for (int rose = 0; ; rose++ ) {
+    		if (rose * 5 > Capacity_Labor || rose * 6 > Capacity_Grape) break;
+    		for (int noir = 0; ; noir++ ) {
+    			if (rose * 5 + noir * 12 > Capacity_Labor || rose * 6 + noir * 4 > Capacity_Grape) break;
+    			int revenue = (int) Math.round(rose * Price_Rose + noir * Price_Noir);
+    			if (revenue > Opt_Revenue) {
+    				Opt_Rose = rose;
+    				Opt_Noir = noir;
+    				Opt_Revenue = revenue;
+    			}
+    		}
+    	}
+    	
+    	//or_Prod_Vol_Rose
+    	or_Prod_Vol_Rose.setText(Integer.toString(Opt_Rose));
+    	//or_Prod_Vol_Noir
+    	or_Prod_Vol_Noir.setText(Integer.toString(Opt_Noir));
+    	//or_Prod_Vol_Total
+    	or_Prod_Vol_Total.setText(Integer.toString(Opt_Rose + Opt_Noir));
+    	//or_Revenue
+    	or_Revenue.setText(Integer.toString(Opt_Revenue));
+    	//or_Backorder_Fulfilment
+    	if (Bko_fulfill) {
+    		or_Backorder_Fulfilment.setText("YES");
+    	} else {
+    		or_Backorder_Fulfilment.setText("NO");
+    	}
+    	
+    	ObservableList<String> items = FXCollections.observableArrayList(
+    			"w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volum!",
+    			"w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!",
+    			"w3: According to company policy, ratio of backorder volume should not lower than 70% of the optimal production volume!"
+    	);
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
+    	
     }
 }
