@@ -141,7 +141,9 @@ public class functionBController {
 
     }
     public void initialize() {
-        WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	
+    	// Validation listeners
+        WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() { // WeekOfYear validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -172,7 +174,7 @@ public class functionBController {
                 }
             }
         });
-        Cap_Labor.textProperty().addListener(new ChangeListener<String>() {
+        Cap_Labor.textProperty().addListener(new ChangeListener<String>() { // Cap_Labor validation
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
@@ -196,7 +198,7 @@ public class functionBController {
                 }
             }
         });
-        Cap_Grape.textProperty().addListener(new ChangeListener<String>() {
+        Cap_Grape.textProperty().addListener(new ChangeListener<String>() { // Cap_Grape validation
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
@@ -220,7 +222,7 @@ public class functionBController {
                 }
             }
         });
-        Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() { // Prc_Rose validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -250,7 +252,7 @@ public class functionBController {
                 }
             }
         });
-        Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() { // Prc_Noir validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -291,6 +293,8 @@ public class functionBController {
     }
 
     public void toclick(ActionEvent actionEvent) {
+    	
+    	// initializing local variables and retrieving input values
     	double temp_rev = 0.0;
     	int opt_rose = 0;
     	int opt_noir = 0;
@@ -298,6 +302,8 @@ public class functionBController {
     	int grape = Integer.parseInt(Cap_Grape.getText());
     	double price_rose = Double.parseDouble(Prc_Rose.getText());
     	double price_noir = Double.parseDouble(Prc_Noir.getText());
+    	
+    	// linear programming
     	for (int temp_rose = 0; ; temp_rose++ ) {
     		if (temp_rose * 5 > labor || temp_rose * 6 > grape) break;
     		for (int temp_noir = 0; ; temp_noir++ ) {
@@ -310,6 +316,8 @@ public class functionBController {
     			}
     		}
     	}
+    	
+    	// update output fields
     	or_Prod_Vol_Rose.setText(Integer.toString(opt_rose));
 		or_Prod_Vol_Noir.setText(Integer.toString(opt_noir));
 		or_Prod_Vol_Total.setText(Integer.toString(opt_rose+opt_noir));
@@ -320,12 +328,15 @@ public class functionBController {
 		if (sur_grape < 4) sur_grape = 0;
 		or_Sur_Labor.setText(Integer.toString(sur_labor));
 		or_Sur_Grape.setText(Integer.toString(sur_grape));
-        ObservableList<String> items1 = FXCollections.observableArrayList("");
-        // ObservableList<String> items2 = FXCollections.observableArrayList("w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!");
-        // ObservableList<String> items3 = FXCollections.observableArrayList("W2: Insufficient labor supplied to utilize the grape resource (less than 90%).");
-        // ObservableList<String> items4 = FXCollections.observableArrayList("w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!", "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).");
-        // if (opt_rose + opt_noir > 5000) // w1
-        // if (sur_grape * 100 / grape > 10) // w2
-        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items1));
+		
+		// 
+        ObservableList<String> items = FXCollections.observableArrayList("");
+        String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
+        String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).";
+        if (opt_rose + opt_noir > 5000) // w1
+        	items.add(W1);
+        if (sur_grape * 100 / grape > 10) // w2
+        	items.add(W2);
+        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     }
 }
