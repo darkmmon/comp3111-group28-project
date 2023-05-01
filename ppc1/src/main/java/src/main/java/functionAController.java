@@ -1,5 +1,7 @@
 package src.main.java;
 
+import java.text.DecimalFormat;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -339,7 +341,33 @@ public class functionAController {
     	Main.stage.setScene(Main.scene);
     }
     
-    public void parsing(int NumWeek, int CapLabor, int CapGrape, double PrcRose, double PrcNoir, int FixedCost) {
+    public void testinput(int a, int b, int c, double d, double e, int f) {
+    	NumWeek = a;
+    	CapLabor = b;
+    	CapGrape = c;
+    	PrcRose = d;
+    	PrcNoir = e;
+    	FixedCost = f;
+    }
+    
+    public double[] testoutput() {
+    	double[] output = {0,0,0,0,0,0,0};
+    	output[0] = Opt_result[0];
+    	output[1] = Opt_result[1];
+    	output[2] = Opt_result[0]+Opt_result[1];
+    	output[3] = Opt_result[2];
+    	final DecimalFormat dfZero = new DecimalFormat("00.0");
+    	output[4] = Double.parseDouble(dfZero.format(ProfitMargin));
+    	if (w1) {
+    		output[5] = 1;
+    	}
+    	if (w2) {
+    		output[6] = 1;
+    	}
+    	return output;
+    }
+    
+    public void parsing() {
     	NumWeek = Integer.parseInt(Num_Week.getText());
     	CapLabor = Integer.parseInt(Cap_Labor.getText());
     	CapGrape = Integer.parseInt(Cap_Grape.getText());
@@ -350,41 +378,45 @@ public class functionAController {
     
     public int NumWeek = 0, CapLabor = 0, CapGrape = 0, FixedCost = 0, OptNoir = 0, OptRose = 0;
 	public double PrcRose = 0, PrcNoir = 0;
+	public boolean w1 = false, w2 = false;
+	public double ProfitMargin = 0;
+	int[] Opt_result = {0,0,0};
 
-    public void toclick(ActionEvent actionEvent) {
-    	//declare variables
-    	NumWeek = Integer.parseInt(Num_Week.getText());
-    	CapLabor = Integer.parseInt(Cap_Labor.getText());
-    	CapGrape = Integer.parseInt(Cap_Grape.getText());
-    	PrcRose = Double.parseDouble(Prc_Rose.getText());
-    	PrcNoir = Double.parseDouble(Prc_Noir.getText());
-    	FixedCost = Integer.parseInt(Fixed_Costs.getText());
-    	
-    	//function A adjustment of price for cost of labor
-    	double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
+	public void calculation() {
+		double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
     	double ProfitNoir = PrcNoir - 12 * 935 / (37.5*60);
     	
-    	int[] Opt_result = Solver.Solve_linear(CapLabor, CapGrape, ProfitRose, ProfitNoir);
+    	Opt_result = Solver.Solve_linear(CapLabor, CapGrape, ProfitRose, ProfitNoir);
     	Opt_result[2] = Opt_result[2]-FixedCost; //converting revenue to profit
+    	ProfitMargin = Opt_result[2]*100 / (Opt_result[0]*PrcRose + Opt_result[1]*PrcNoir);
+	}
+	
+    public void toclick(ActionEvent actionEvent) {
+    	//declare variables
+    	parsing();
+    	
+    	//function A adjustment of price for cost of labor
+    	calculation();
     	
     	//output
     	or_Prod_Vol_Rose.setText(Integer.toString(Opt_result[0]));
 		or_Prod_Vol_Noir.setText(Integer.toString(Opt_result[1]));
 		or_Prod_Vol_Total.setText(Integer.toString(Opt_result[0]+Opt_result[1]));
 		or_Gross_Profit.setText(Double.toString(Opt_result[2]));
-		double ProfitMargin = Opt_result[2]*100 / (Opt_result[0]*PrcRose + Opt_result[1]*PrcNoir);
-		or_Profit_Margin.setText(Double.toString(ProfitMargin));
+		final DecimalFormat dfZero = new DecimalFormat("00.0");
+		or_Profit_Margin.setText(dfZero.format(ProfitMargin));
 		
 		//error output
 		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
 		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
 		
     	ObservableList<String> items = FXCollections.observableArrayList();
-    	
-    	if ( 5000 * NumWeek < Opt_result[0] + Opt_result[1] ) {
+    	w1 = 5000 * NumWeek < Opt_result[0] + Opt_result[1];
+    	if ( w1 ) {
     		items.add(W1);
     	}
-    	if ( (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90 ) {
+    	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
+    	if ( w2 ) {
     		items.add(W2);
     	}
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
