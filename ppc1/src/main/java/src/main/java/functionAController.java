@@ -389,6 +389,9 @@ public class functionAController {
     	Opt_result = Solver.Solve_linear(CapLabor, CapGrape, ProfitRose, ProfitNoir);
     	Opt_result[2] = Opt_result[2]-FixedCost; //converting revenue to profit
     	ProfitMargin = Opt_result[2]*100 / (Opt_result[0]*PrcRose + Opt_result[1]*PrcNoir);
+    	
+    	w1 = 5000 * NumWeek < Opt_result[0] + Opt_result[1];
+    	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
 	}
 	
     public void toclick(ActionEvent actionEvent) {
@@ -411,11 +414,9 @@ public class functionAController {
 		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
 		
     	ObservableList<String> items = FXCollections.observableArrayList();
-    	w1 = 5000 * NumWeek < Opt_result[0] + Opt_result[1];
     	if ( w1 ) {
     		items.add(W1);
     	}
-    	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
     	if ( w2 ) {
     		items.add(W2);
     	}

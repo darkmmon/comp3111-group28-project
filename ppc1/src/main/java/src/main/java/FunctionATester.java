@@ -47,6 +47,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	@Test
 	public void calculationtest2() {
 		functionAController temp = new functionAController();
 		temp.testinput(1, 10000, 10000, 15, 10, 2000);
@@ -57,6 +58,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	@Test
 	public void calculationtest3() {
 		functionAController temp = new functionAController();
 		temp.testinput(1, 10000, 6000, 15, 30, 2000);
@@ -67,6 +69,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	@Test
 	public void waringtest1() {
 		functionAController temp = new functionAController();
 		temp.testinput(1, 100000, 100000, 10, 10, 1000);
@@ -77,6 +80,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	@Test
 	public void warningtest2() {
 		functionAController temp = new functionAController();
 		temp.testinput(1, 1000, 100000, 10, 10, 1000);
@@ -87,6 +91,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	@Test
 	public void warningtest3() {
 		functionAController temp = new functionAController();
 		temp.testinput(1, 30000, 100000, 10, 15, 1000);
