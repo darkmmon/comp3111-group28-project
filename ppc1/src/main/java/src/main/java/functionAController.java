@@ -242,11 +242,11 @@ public class functionAController {
                 		if (Prc_Rose.getText() == null || Prc_Rose.getText().trim().isEmpty()) {
                 			Prc_Rose.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Rose.getText())) {
+                			if (0 > Double.parseDouble(Prc_Rose.getText()) || 10000 < Double.parseDouble(Prc_Rose.getText())) {
     	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
     	                        alert.setTitle("error");
     	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number greater than 0");
+    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
     	                        alert.showAndWait();
     	                        Prc_Rose.setText("");
     	                    } else {
@@ -259,7 +259,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter a number in range of 0 to 10000");
                     alert.showAndWait();
                     Prc_Rose.setText("");
                 }
@@ -273,11 +273,11 @@ public class functionAController {
                 		if (Prc_Noir.getText() == null || Prc_Noir.getText().trim().isEmpty()) {
                 			Prc_Noir.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Noir.getText())) {
+                			if (0 > Double.parseDouble(Prc_Noir.getText()) || 10000 < Double.parseDouble(Prc_Noir.getText())) {
     	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
     	                        alert.setTitle("error");
     	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number greater than 0");
+    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
     	                        alert.showAndWait();
     	                        Prc_Noir.setText("");
     	                    } else {
@@ -290,7 +290,7 @@ public class functionAController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter a number in range of 0 to 10000");
                     alert.showAndWait();
                     Prc_Noir.setText("");
                 }
@@ -328,6 +328,7 @@ public class functionAController {
             }
         });
     }
+    
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
     
@@ -339,7 +340,7 @@ public class functionAController {
     	Main.stage.setScene(Main.scene);
     }
     
-    public void testinput(int a, int b, int c, double d, double e, int f) {
+    public void testInput(int a, int b, int c, double d, double e, int f) {
     	NumWeek = a;
     	CapLabor = b;
     	CapGrape = c;
@@ -348,29 +349,33 @@ public class functionAController {
     	FixedCost = f;
     }
     
-    public double[] testoutput() {
-    	double[] output = {0,0,0,0,0,0,0};
+    public double[] testCalculation() {
+    	double[] output = {0,0,0,0,0};
     	output[0] = Opt_result[0];
     	output[1] = Opt_result[1];
     	output[2] = Opt_result[0]+Opt_result[1];
     	output[3] = Opt_result[2];
-    	final DecimalFormat dfZero = new DecimalFormat("00.0");
-    	output[4] = Double.parseDouble(dfZero.format(ProfitMargin));
-    	if (w1) {
-    		output[5] = 1;
-    	}
-    	if (w2) {
-    		output[6] = 1;
-    	}
+    	output[4] = ProfitMargin;
     	return output;
     }
     
+    public boolean[] testWarningState() {
+    	boolean[] warningState = {false, false};
+    	if (w1) {
+    		warningState[0] = true;
+    	}
+    	if (w2) {
+    		warningState[1] = true;
+    	}
+    	return warningState;
+    }
+    
     // global variables
-    public int NumWeek = 0, CapLabor = 0, CapGrape = 0, FixedCost = 0, OptNoir = 0, OptRose = 0;
-	public double PrcRose = 0, PrcNoir = 0;
-	public boolean w1 = false, w2 = false;
-	public double ProfitMargin = 0;
-	int[] Opt_result = {0,0,0};
+    private int NumWeek = 0, CapLabor = 0, CapGrape = 0, FixedCost = 0, OptNoir = 0, OptRose = 0;
+    private double PrcRose = 0, PrcNoir = 0;
+    private boolean w1 = false, w2 = false;
+    private double ProfitMargin = 0;
+	private int[] Opt_result = {0,0,0};
 
 	public void calculation() {
 		double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
@@ -384,7 +389,19 @@ public class functionAController {
     	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
 	}
 	
-	public ObservableList<String> warning_text(){
+	public String[] formattedOutput() {
+		final DecimalFormat zero_dp = new DecimalFormat("#");
+		final DecimalFormat one_dp = new DecimalFormat("00.00");
+		String[] output = {"","","","",""};
+		output[0] = Integer.toString(Opt_result[0]);
+		output[1] = Integer.toString(Opt_result[1]);
+		output[2] = Integer.toString(Opt_result[0]+Opt_result[1]);
+		output[3] = zero_dp.format(Opt_result[2]);
+		output[4] = one_dp.format(ProfitMargin);
+		return output;
+	}
+	
+	public ObservableList<String> warningText(){
 		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
 		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
 		
@@ -412,16 +429,16 @@ public class functionAController {
     	calculation();
     	
     	//output
-    	or_Prod_Vol_Rose.setText(Integer.toString(Opt_result[0]));
-		or_Prod_Vol_Noir.setText(Integer.toString(Opt_result[1]));
-		or_Prod_Vol_Total.setText(Integer.toString(Opt_result[0]+Opt_result[1]));
-		or_Gross_Profit.setText(Double.toString(Opt_result[2]));
-		final DecimalFormat dfZero = new DecimalFormat("00.0");
-		or_Profit_Margin.setText(dfZero.format(ProfitMargin));
+    	String[] output = formattedOutput();
+    	or_Prod_Vol_Rose.setText(output[0]);
+		or_Prod_Vol_Noir.setText(output[1]);
+		or_Prod_Vol_Total.setText(output[2]);
+		or_Gross_Profit.setText(output[3]);
+		or_Profit_Margin.setText(output[4]);
 		
 		//error output
 		
-    	ObservableList<String> items = warning_text();
+    	ObservableList<String> items = warningText();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     }
 }
