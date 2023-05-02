@@ -140,8 +140,6 @@ public class functionAController {
     	
     }
     
-    
-    
     public void initialize() {
     	Num_Week.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -367,15 +365,7 @@ public class functionAController {
     	return output;
     }
     
-    public void parsing() {
-    	NumWeek = Integer.parseInt(Num_Week.getText());
-    	CapLabor = Integer.parseInt(Cap_Labor.getText());
-    	CapGrape = Integer.parseInt(Cap_Grape.getText());
-    	PrcRose = Double.parseDouble(Prc_Rose.getText());
-    	PrcNoir = Double.parseDouble(Prc_Noir.getText());
-    	FixedCost = Integer.parseInt(Fixed_Costs.getText());
-    }
-    
+    // global variables
     public int NumWeek = 0, CapLabor = 0, CapGrape = 0, FixedCost = 0, OptNoir = 0, OptRose = 0;
 	public double PrcRose = 0, PrcNoir = 0;
 	public boolean w1 = false, w2 = false;
@@ -394,9 +384,29 @@ public class functionAController {
     	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
 	}
 	
+	public ObservableList<String> warning_text(){
+		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
+		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
+		
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	if ( w1 ) {
+    		items.add(W1);
+    	}
+    	if ( w2 ) {
+    		items.add(W2);
+    	}
+    	return items;
+	}
+	
     public void toclick(ActionEvent actionEvent) {
     	//declare variables
-    	parsing();
+
+    	NumWeek = Integer.parseInt(Num_Week.getText());
+    	CapLabor = Integer.parseInt(Cap_Labor.getText());
+    	CapGrape = Integer.parseInt(Cap_Grape.getText());
+    	PrcRose = Double.parseDouble(Prc_Rose.getText());
+    	PrcNoir = Double.parseDouble(Prc_Noir.getText());
+    	FixedCost = Integer.parseInt(Fixed_Costs.getText());
     	
     	//function A adjustment of price for cost of labor
     	calculation();
@@ -410,16 +420,8 @@ public class functionAController {
 		or_Profit_Margin.setText(dfZero.format(ProfitMargin));
 		
 		//error output
-		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
-		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
 		
-    	ObservableList<String> items = FXCollections.observableArrayList();
-    	if ( w1 ) {
-    		items.add(W1);
-    	}
-    	if ( w2 ) {
-    		items.add(W2);
-    	}
+    	ObservableList<String> items = warning_text();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     }
 }

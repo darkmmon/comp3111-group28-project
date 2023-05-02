@@ -7,8 +7,11 @@ import org.junit.Test;
 import org.junit.BeforeClass;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ public class FunctionATester {
 //
 //	@BeforeClass
 //	public static void initJFX() throws IOException, InterruptedException {
-////		Application.launch(AsNonApp.class, new String[0]);
+//		Application.launch(AsNonApp.class, new String[0]);
 //	    t = new Thread("JavaFX Init Thread") {
 //	        public void run() {
 //	            Application.launch(AsNonApp.class, new String[0]);
@@ -102,4 +105,41 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.001);
 		}
 	}
+	
+	@Test
+	public void warningtexttest1() {
+		functionAController temp = new functionAController();
+		temp.testinput(1, 100000, 100000, 10, 10, 1000);
+		temp.calculation();
+		ObservableList<String> actual = temp.warning_text();
+		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
+		ObservableList<String> expected = FXCollections.observableArrayList();
+		expected.add(W1);
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	public void warningtexttest2() {
+		functionAController temp = new functionAController();
+		temp.testinput(1, 1000, 100000, 10, 10, 1000);
+		temp.calculation();
+		ObservableList<String> actual = temp.warning_text();
+		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
+		ObservableList<String> expected = FXCollections.observableArrayList();
+		expected.add(W2);
+		assertEquals(actual, expected);
+	}
+	
+//	@Test
+//	public void input_error_test() {
+//		functionAController temp = new functionAController();
+//		Alert actual = temp.error_message(0);
+//		Alert expected = new Alert(Alert.AlertType.INFORMATION);
+//		expected.setTitle("error");
+//		expected.setHeaderText("input error");
+//		expected.setContentText("Please enter an integer greater than 0 and less than 15");
+//		expected.showAndWait();
+//		assertEquals(actual, expected);
+//		assertEquals(1,1);
+//	}
 }
