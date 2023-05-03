@@ -157,7 +157,7 @@ public class functionAController {
     	                        alert.showAndWait();
     	                        Num_Week.setText("");
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
 	                    
@@ -250,7 +250,7 @@ public class functionAController {
     	                        alert.showAndWait();
     	                        Prc_Rose.setText("");
     	                    } else {
-    	
+    	                    	Prc_Rose.setText(String.format("%.2f", Double.parseDouble(Prc_Rose.getText())));
     	                    }
                 		}
 	                    
@@ -281,7 +281,7 @@ public class functionAController {
     	                        alert.showAndWait();
     	                        Prc_Noir.setText("");
     	                    } else {
-    	
+    	                    	Prc_Noir.setText(String.format("%.2f", Double.parseDouble(Prc_Rose.getText())));
     	                    }
                 		}
 	                    
