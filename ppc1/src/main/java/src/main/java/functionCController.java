@@ -157,197 +157,235 @@ public class functionCController {
     }
     public void initialize() {
     	
-    	//Input Validation for WeekOfYear
-    	WeekOfYear.textProperty().addListener(new ChangeListener<String>() {
-    		@Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try {
-                    if (!newValue.matches("(2)") &&
-    	    			!newValue.matches("(23)") &&
-    	    			!newValue.matches("(23)[0-1]") &&
-    	    			!newValue.matches("(23)(0[1-9]|1[0-5])")) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("Input Error");
-                        alert.setContentText("Please enter a number from 2301 to 2315");
-                        alert.showAndWait();
-                        WeekOfYear.setText("");
-                    }
-                } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Input Error");
-                    alert.setContentText("Please enter a valid integer");
-                    alert.showAndWait();
-                    WeekOfYear.setText("");
-                }
-            }
-    	});
-    	
-    	//Input Validation for Cap_Labor
-    	Cap_Labor.textProperty().addListener(new ChangeListener<String>() {
+    	WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (!newValue.matches("^(?!0)\\d{1,8}$")) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer from 1 to 99,999,999");
-                        alert.showAndWait();
-                        Cap_Labor.setText("");
-                    } else {
-
-                    }
+                	if (!newValue) {
+                		if (WeekOfYear.getText() == null || WeekOfYear.getText().trim().isEmpty()) {
+                			WeekOfYear.setText("");
+                		} else {
+                			if (2301 > Integer.parseInt(WeekOfYear.getText()) || 2315 < Integer.parseInt(WeekOfYear.getText())) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater than 2301 and less than 2315");
+    	                        alert.showAndWait();
+    	                        WeekOfYear.setText("");
+    	                    } else {
+    	
+    	                    }
+                		}
+	                    
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 1 to 99,999,999");
+                    alert.setContentText("Please enter the number greater than 2301 and less than 2315");
+                    alert.showAndWait();
+                    WeekOfYear.setText("");
+                }
+            }
+        });
+    	    	
+    	Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                	if (!newValue) {
+                		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
+                			Cap_Labor.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Cap_Labor.getText()) || Integer.parseInt(Cap_Labor.getText()) > 99999999) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater than 0 and less than 100,000,000");
+    	                        alert.showAndWait();
+    	                        Cap_Labor.setText("");
+    	                    } else {
+
+    	                    }
+                		}
+
+                	}
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText("input error");
+                    alert.setContentText("Please enter the number greater than 0 and less than 100,000,000");
                     alert.showAndWait();
                     Cap_Labor.setText("");
                 }
             }
         });
-    	//Input Validation for Cap_Grape
-    	Cap_Grape.textProperty().addListener(new ChangeListener<String>() {
+    	
+    	
+    	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (!newValue.matches("^(?!0)\\d{1,8}$")) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer from 1 to 99,999,999");
-                        alert.showAndWait();
-                        Cap_Grape.setText("");
-                    } else {
+                	if (!newValue) {
+                		if (Cap_Grape.getText() == null || Cap_Grape.getText().trim().isEmpty()) {
+                			Cap_Grape.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Cap_Grape.getText()) || Integer.parseInt(Cap_Grape.getText()) > 99999999) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater than 0 and less than 100,000,000");
+    	                        alert.showAndWait();
+    	                        Cap_Labor.setText("");
+    	                    } else {
 
-                    }
+    	                    }
+                		}
+
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 1 to 99,999,999");
+                    alert.setContentText("Please enter the number greater than 0 and less than 100,000,000");
                     alert.showAndWait();
                     Cap_Grape.setText("");
                 }
             }
         });
-    	//Input Validation for Prc_Rose Float.parseFloat
-    	Prc_Rose.textProperty().addListener(new ChangeListener<String>() {
+    	
+    	
+    	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            	//Pattern pattern = Pattern.compile("^([1-9]\\d{0,3}(\\.\\d{1,2})?|9999\\.99)$");
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (Double.parseDouble(newValue) < 1.00 || Double.parseDouble(newValue) >= 10000.00) { 
-                    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                		alert.setTitle("error");
-                		alert.setHeaderText("input error");
-                		alert.setContentText("Please enter an float from 1 to 9,999.99");
-                		alert.showAndWait();
-                		Prc_Rose.setText("");
-                    	
-                    } else if (!newValue.matches("^-?\\d+(\\.\\d{0,2})?$")) {
-                    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                		alert.setTitle("error");
-                		alert.setHeaderText("input error");
-                		alert.setContentText("lease enter an float from 1 to 9,999.99");
-                		alert.showAndWait();
-                		Prc_Rose.setText("");
+                	if (!newValue) {
+                		if (Prc_Rose.getText() == null || Prc_Rose.getText().trim().isEmpty()) {
+                			Prc_Rose.setText("");
+                		} else {
+                			if (0 > Double.parseDouble(Prc_Rose.getText()) || 10000 < Double.parseDouble(Prc_Rose.getText())) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter the number greater than 0 and less than 10,000");
+    	                        alert.showAndWait();
+    	                        Prc_Rose.setText("");
+    	                    } else {
+
+    	                    }
+                		}
+
                 	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 1 to 9,999.99");
+                    alert.setContentText("Please enter the number greater than 0 and less than 10,000");
                     alert.showAndWait();
                     Prc_Rose.setText("");
                 }
             }
         });
-    	//Input Validation for Prc_Noir
-    	Prc_Noir.textProperty().addListener(new ChangeListener<String>() {
+    	
+    	
+    	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            	//Pattern pattern = Pattern.compile("^([1-9]\\d{0,3}(\\.\\d{1,2})?|9999\\.99)$");
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (Double.parseDouble(newValue) < 1.00 || Double.parseDouble(newValue) >= 10000.00) { 
-                    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                		alert.setTitle("error");
-                		alert.setHeaderText("input error");
-                		alert.setContentText("Please enter an float from 1 to 9,999.99");
-                		alert.showAndWait();
-                		Prc_Noir.setText("");
-                    	
-                    } else if (!newValue.matches("^-?\\d+(\\.\\d{0,2})?$")) {
-                    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                		alert.setTitle("error");
-                		alert.setHeaderText("input error");
-                		alert.setContentText("Please enter an float from 1 to 9,999.99");
-                		alert.showAndWait();
-                		Prc_Noir.setText("");
+                	if (!newValue) {
+                		if (Prc_Noir.getText() == null || Prc_Noir.getText().trim().isEmpty()) {
+                			Prc_Noir.setText("");
+                		} else {
+                			if (0 > Double.parseDouble(Prc_Noir.getText()) || 10000 < Double.parseDouble(Prc_Noir.getText())) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter the number greater than 0 and less than 10,000");
+    	                        alert.showAndWait();
+    	                        Prc_Noir.setText("");
+    	                    } else {
+
+    	                    }
+                		}
+
                 	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 1 to 9,999.99");
+                    alert.setContentText("Please enter the number greater than 0 and less than 10,000");
                     alert.showAndWait();
                     Prc_Noir.setText("");
                 }
             }
         });
-    	//Input Validation for Bko_Rose
-    	Bko_Rose.textProperty().addListener(new ChangeListener<String>() {
+        
+    	
+    	Bko_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (!newValue.matches("^(?!$)\\d{1,8}$")) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer from 0 to 99,999,999");
-                        alert.showAndWait();
-                        Bko_Rose.setText("");
-                    } else {
+                	if (!newValue) {
+                		if (Bko_Rose.getText() == null || Bko_Rose.getText().trim().isEmpty()) {
+                			Bko_Rose.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Bko_Rose.getText()) || Integer.parseInt(Bko_Rose.getText()) > 99999999) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater or equal to 0 and less than 100,000,000");
+    	                        alert.showAndWait();
+    	                        Bko_Rose.setText("");
+    	                    } else {
 
-                    }
+    	                    }
+                		}
+
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 0 to 99,999,999");
+                    alert.setContentText("Please enter the number greater or equal to 0 and less than 100,000,000");
                     alert.showAndWait();
                     Bko_Rose.setText("");
                 }
             }
         });
-    	//Input Validation for Bko_Noir
-    	Bko_Noir.textProperty().addListener(new ChangeListener<String>() {
+        
+        
+    	Bko_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (!newValue.matches("^(?!$)\\d{1,8}$")) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer from 0 to 99,999,999");
-                        alert.showAndWait();
-                        Bko_Noir.setText("");
-                    } else {
+                	if (!newValue) {
+                		if (Bko_Noir.getText() == null || Bko_Noir.getText().trim().isEmpty()) {
+                			Bko_Noir.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Bko_Noir.getText()) || Integer.parseInt(Bko_Noir.getText()) > 99999999) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater or equal to 0 and less than 100,000,000");
+    	                        alert.showAndWait();
+    	                        Bko_Noir.setText("");
+    	                    } else {
 
-                    }
+    	                    }
+                		}
+
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number from 0 to 99,999,999");
+                    alert.setContentText("Please enter the number greater or equal to 0 and less than 100,000,000");
                     alert.showAndWait();
                     Bko_Noir.setText("");
                 }
             }
         });
+        
     }
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
@@ -357,6 +395,54 @@ public class functionCController {
 
     public void toexit(ActionEvent actionEvent) {Main.stage.setScene(Main.scene);
     }
+    
+    //private int  = 0;
+    private int CapLabor = 0, CapGrape = 0, OptNoir = 0, OptRose = 0, BkoRose = 0, BkoNoir = 0;
+    private double PrcRose = 0, PrcNoir = 0;
+    private boolean w1 = false, w2 = false, w3 = false;
+    private boolean BkoFulfill = false;
+    //private double ProfitMargin = 0;
+    private int[] Opt_result = {0,0,0};
+    
+    public void calculation() {
+		//double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
+    	//double ProfitNoir = PrcNoir - 12 * 935 / (37.5*60);
+
+    	Opt_result = Solver.Solve_linear(CapLabor, CapGrape, PrcRose, PrcNoir);
+    	//Opt_result[2] = Opt_result[2]-FixedCost; //converting revenue to profit
+    	//ProfitMargin = Opt_result[2]*100 / (Opt_result[0]*PrcRose + Opt_result[1]*PrcNoir);
+    	int BkoRoseLabor = BkoRose * 5;	//5 mins of labor per L
+    	int BkoRoseGrape = BkoRose * 6;	//6 kg of grapes per L
+    	int BkoNoirLabor = BkoNoir * 12;	//12 mins of labor per L
+    	int BkoNoirGrape = BkoNoir * 4;	//4 kg of grapes per L
+    	boolean BkoFulfillLabor = false, BkoFulfillGrape = false;
+    	
+    	if (CapLabor >= BkoRoseLabor + BkoNoirLabor) {
+    		BkoFulfillLabor = true;
+    	}
+    	if (CapGrape >= BkoRoseGrape + BkoNoirGrape) {
+    		BkoFulfillGrape = true;
+    	}
+    	
+    	if (BkoFulfillLabor && BkoFulfillGrape) {
+    		BkoFulfill = true;
+    	}
+    	
+    	if (BkoFulfill) {
+    		CapLabor = CapLabor - ( BkoRoseLabor + BkoNoirLabor );
+    		CapGrape = CapGrape - ( BkoRoseGrape + BkoNoirGrape );
+    	}
+
+    	//w1 = 5000 * NumWeek < Opt_result[0] + Opt_result[1];
+    	//w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
+    	int SurplusGrape = CapGrape - OptRose * 6 - OptNoir * 4;
+		if (SurplusGrape < 4) {
+			SurplusGrape = 0;
+		}
+    	w1 = OptRose + OptNoir > 5000;
+    	w2 = SurplusGrape * 100 / CapGrape > 10;
+    	w3 = BkoRose + BkoNoir < ( OptRose + OptNoir ) * 0.7;
+	}
 
     public void toclick(ActionEvent actionEvent) {
         
