@@ -180,7 +180,7 @@ public class functionAController {
                 		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
                 			Cap_Labor.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Labor.getText()) ) {
+                			if (0 > Integer.parseInt(Cap_Labor.getText()) || 99999999 < Integer.parseInt(Cap_Labor.getText()) ) {
     	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
     	                        alert.setTitle("error");
     	                        alert.setHeaderText("input error");
@@ -211,7 +211,7 @@ public class functionAController {
                 		if (Cap_Grape.getText() == null || Cap_Grape.getText().trim().isEmpty()) {
                 			Cap_Grape.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Grape.getText())) {
+                			if (0 > Integer.parseInt(Cap_Grape.getText()) || 99999999 < Integer.parseInt(Cap_Grape.getText())) {
     	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
     	                        alert.setTitle("error");
     	                        alert.setHeaderText("input error");
@@ -301,7 +301,7 @@ public class functionAController {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
                 	if (!newValue) {
-                		if (Fixed_Costs.getText() == null || Fixed_Costs.getText().trim().isEmpty()) {
+                		if (Fixed_Costs.getText() == null || 99999999 < Integer.parseInt(Fixed_Costs.getText())) {
                 			Fixed_Costs.setText("");
                 		} else {
                 			if (0 > Integer.parseInt(Fixed_Costs.getText())) {
