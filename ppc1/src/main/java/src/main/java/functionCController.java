@@ -168,7 +168,7 @@ public class functionCController {
     	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
     	                        alert.setTitle("error");
     	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 2301 and less than 2315");
+    	                        alert.setContentText("Please enter an integer from 2301 to 2315");
     	                        alert.showAndWait();
     	                        WeekOfYear.setText("");
     	                    } else {
@@ -392,7 +392,48 @@ public class functionCController {
 
     }
 
-    public void toexit(ActionEvent actionEvent) {Main.stage.setScene(Main.scene);
+    public void toexit(ActionEvent actionEvent) {
+    	Main.stage.setScene(Main.scene);
+    }
+    
+    public void testInput(int a, int b, int c, double d, double e, int f, int g) {
+    	CapLabor = b;
+    	CapGrape = c;
+    	PrcRose = d;
+    	PrcNoir = e;
+    	BkoRose = f;
+    	BkoNoir = g;
+    }
+    
+    public double[] testCalculation() {
+    	double[] output = {0, 0, 0, 0};
+    	output[0] = Opt_result[0];
+    	output[1] = Opt_result[1];
+    	output[2] = Opt_result[0]+Opt_result[1];
+    	output[3] = Opt_result[2];
+    	return output;
+    }
+    public String testBkoFulfill() {
+    	String output = "";
+		if (BkoFulfill) {
+			output = "YES";
+    	} else {
+    		output = "NO";
+    	}
+    	return output;
+    }
+    public boolean[] testWarningState() {
+    	boolean[] warningState = {false, false, false};
+    	if (w1) {
+    		warningState[0] = true;
+    	}
+    	if (w2) {
+    		warningState[1] = true;
+    	}
+    	if (w3) {
+    		warningState[2] = true;
+    	}
+    	return warningState;
     }
     
     private int CapLabor = 0, CapGrape = 0, OptNoir = 0, OptRose = 0, BkoRose = 0, BkoNoir = 0;
@@ -402,21 +443,27 @@ public class functionCController {
     private int[] Opt_result = {0,0,0};
     
     public void calculation() {
-		int BkoRoseLabor = BkoRose * 5;	//5 mins of labor per L
-    	int BkoRoseGrape = BkoRose * 6;	//6 kg of grapes per L
+		int BkoRoseLabor = BkoRose * 5;		//5 mins of labor per L
     	int BkoNoirLabor = BkoNoir * 12;	//12 mins of labor per L
-    	int BkoNoirGrape = BkoNoir * 4;	//4 kg of grapes per L
+    	int BkoRoseGrape = BkoRose * 6;		//6 kg of grapes per L
+    	int BkoNoirGrape = BkoNoir * 4;		//4 kg of grapes per L
     	boolean BkoFulfillLabor = false, BkoFulfillGrape = false;
     	
     	if (CapLabor >= BkoRoseLabor + BkoNoirLabor) {
     		BkoFulfillLabor = true;
+    	}else {
+    		BkoFulfillLabor = false;
     	}
     	if (CapGrape >= BkoRoseGrape + BkoNoirGrape) {
     		BkoFulfillGrape = true;
+    	}else {
+    		BkoFulfillGrape = false;
     	}
     	
     	if (BkoFulfillLabor && BkoFulfillGrape) {
     		BkoFulfill = true;
+    	}else {
+    		BkoFulfill = false;
     	}
     	
     	if (BkoFulfill) {
@@ -425,6 +472,8 @@ public class functionCController {
     	}
     	
     	Opt_result = Solver.Solve_linear(CapLabor, CapGrape, PrcRose, PrcNoir);
+    	OptRose = Opt_result[0];
+    	OptNoir = Opt_result[1];
     	//Opt_result[0] = OptRose
     	//Opt_result[1] = OptNoir
     	//Opt_result[2] = OptRevenue
@@ -433,8 +482,8 @@ public class functionCController {
 		if (SurplusGrape < 4) {
 			SurplusGrape = 0;
 		}
-    	w1 = Opt_result[0] + Opt_result[1] > 5000;
-    	w2 = SurplusGrape * 100 / CapGrape > 10;
+    	w1 = OptRose + OptNoir > 5000;
+		w2 = SurplusGrape * 100 / CapGrape > 10;
     	w3 = BkoRose + BkoNoir < ( OptRose + OptNoir ) * 0.7;
 	}
     
