@@ -11,6 +11,11 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+/**
+ * Controller for function B - Weekly Review by Revenue
+ * @author LEUNG Kam Ming 20863408
+ *
+ */
 public class functionBController {
 
     @FXML
@@ -140,6 +145,10 @@ public class functionBController {
     void buttonpressed(ActionEvent event) {
 
     }
+    
+    /**
+     * Method to initialize field validation listeners for all input fields
+     */
     public void initialize() {
     	
     	// Validation listeners
@@ -302,13 +311,24 @@ public class functionBController {
     public void toexit(ActionEvent actionEvent) {Main.stage.setScene(Main.scene);
     }
     
-    public void testInput(int a, int b, int c, double d, double e) {
-    	CapLabor = b;
-    	CapGrape = c;
-    	PrcRose = d;
-    	PrcNoir = e;
+    /**
+     * Testing method to pass inputs to other methods without user input
+     * @param a CapLabor - Labor Capacity (accepts positive int)
+     * @param b CapGrape - Grape Capacity (accepts positive int)
+     * @param c PrcRose - Unit Price of Rose (accepts positive double, corrected to 2 decimal places)
+     * @param d PrcNoir - Unit Price of Noir (accepts positive double, corrected to 2 decimal places)
+     */
+    public void testInput(int a, int b, double c, double d) {
+    	CapLabor = a;
+    	CapGrape = b;
+    	PrcRose = c;
+    	PrcNoir = d;
     }
     
+    /**
+     * Testing method to return output from linear programming method in Solver.java
+     * @return an array of outputs: [OptRose, OptNoir, OptTotal, Revenue, SurLabor, SurGrape]
+     */
     public int[] testCalculation() {
     	int[] output = {0,0,0,0,0,0};
     	output[0] = Opt_result[0];
@@ -320,6 +340,10 @@ public class functionBController {
     	return output;
     }
     
+    /**
+     * Testing method to return warning states
+     * @return array of booleans: [w1, w2] corresponding to warning states 1 and 2
+     */
     public boolean[] testWarningState() {
     	boolean[] warningState = {false, false};
     	if (w1) {
@@ -331,12 +355,15 @@ public class functionBController {
     	return warningState;
     }
     
- // global variables
+    // global variables
     private int CapLabor = 0, CapGrape = 0, OptNoir = 0, OptRose = 0, SurLabor = 0, SurGrape = 0;
     private double PrcRose = 0, PrcNoir = 0;
     private boolean w1 = false, w2 = false;
 	private int[] Opt_result = {0,0,0};
 	
+	/**
+	 * Method to call solver and store outputs in array Opt_result
+	 */
 	public void calculation() {
 		Opt_result = Solver.Solve_linear(CapLabor, CapGrape, PrcRose, PrcNoir);
 		OptRose = Opt_result[0];
@@ -350,6 +377,10 @@ public class functionBController {
 		w2 = SurGrape * 100 / CapGrape > 10;
 	}
 	
+	/**
+	 * Method to convert output values to strings
+	 * @return array of String: [OptRose, OptNoir, OptTotal, Revenue, SurLabor, SurGrape]
+	 */
 	public String[] formattedOutput() {
 		String[] output = {"","","","","",""};
 		output[0] = Integer.toString(Opt_result[0]);
@@ -361,6 +392,10 @@ public class functionBController {
 		return output;
 	}
 	
+	/**
+	 * Adds warning messages according to warning states [w1, w2]
+	 * @return Observable List of warning message Strings
+	 */
 	public ObservableList<String> warningText() {
 		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
         String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
@@ -375,6 +410,12 @@ public class functionBController {
     	return items;
 	}
 	
+	/**
+	 * Method when "Run" button is clicked in the UI.
+	 * retrieves values from inputs, calls calculation method, stores output values in output fields, and
+	 * show corresponding warnings.
+	 * @param actionEvent When user clicks the "Run" button
+	 */
     public void toclick(ActionEvent actionEvent) {
     	
     	// initializing local variables and retrieving input values
@@ -385,21 +426,8 @@ public class functionBController {
     	
     	// linear programming
     	calculation();
-//    	for (int temp_rose = 0; ; temp_rose++ ) {
-//    		if (temp_rose * 5 > labor || temp_rose * 6 > grape) break;
-//    		for (int temp_noir = 0; ; temp_noir++ ) {
-//    			if (temp_rose * 5 + temp_noir * 12 > labor || temp_rose * 6 + temp_noir * 4 > grape) break;
-//    			double cur_rev = temp_rose * price_rose + temp_noir * price_noir;
-//    			if (cur_rev > temp_rev) {
-//    				opt_rose = temp_rose;
-//    				opt_noir = temp_noir;
-//    				temp_rev = cur_rev;
-//    			}
-//    		}
-//    	}
     	
     	// update output fields
-    	
     	String[] output = formattedOutput();
     	or_Prod_Vol_Rose.setText(output[0]);
 		or_Prod_Vol_Noir.setText(output[1]);
@@ -408,29 +436,8 @@ public class functionBController {
 		or_Sur_Labor.setText(output[4]);
 		or_Sur_Grape.setText(output[5]);
 		
-//    	or_Prod_Vol_Rose.setText(Integer.toString(opt_rose));
-//		or_Prod_Vol_Noir.setText(Integer.toString(opt_noir));
-//		or_Prod_Vol_Total.setText(Integer.toString(opt_rose+opt_noir));
-//		or_Revenue.setText(Double.toString(temp_rev));
-//		int sur_labor = labor - opt_rose * 5 - opt_noir * 12;
-//		if (sur_labor < 5) sur_labor = 0;
-//		int sur_grape = grape - opt_rose * 6 - opt_noir * 4;
-//		if (sur_grape < 4) sur_grape = 0;
-//		or_Sur_Labor.setText(Integer.toString(sur_labor));
-//		or_Sur_Grape.setText(Integer.toString(sur_grape));
-		
-		// 
-		
+		// display warnings
 		ObservableList<String> items = warningText();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
-        
-//        ObservableList<String> items = FXCollections.observableArrayList("");
-//        String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
-//        String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).";
-//        if (opt_rose + opt_noir > 5000) // w1
-//        	items.add(W1);
-//        if (sur_grape * 100 / grape > 10) // w2
-//        	items.add(W2);
-//        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     }
 }
