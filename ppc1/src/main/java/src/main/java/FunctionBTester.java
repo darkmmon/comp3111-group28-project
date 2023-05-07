@@ -45,7 +45,7 @@ public class FunctionBTester {
 			assertEquals(actual[i], expected[i],0.0001);
 		}
 	}
-	
+	@Test
 	public void calculationTest4() {
 		functionBController temp = new functionBController();
 		temp.testInput(100, 100, 0, 0);
