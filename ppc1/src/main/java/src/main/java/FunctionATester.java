@@ -161,7 +161,7 @@ public class FunctionATester {
 	}
 	
 	@Test
-	public void output_format_test() {
+	public void output_format_test1() {
 		functionAController temp = new functionAController();
 		temp.testInput(1, 100, 100, 10, 10, 1);
 		temp.calculation();
@@ -171,4 +171,49 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i]);			
 		}
 	}
+	@Test
+	public void output_format_test2() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 10000, 10000, 15, 10, 2000);
+		temp.calculation();
+		String[] actual = temp.formattedOutput();
+		String[] expected = {"1666","1","1667","19533","78.13"};
+		for (int i = 0; i < 5; i++) {
+			assertEquals(actual[i], expected[i]);			
+		}
+	}
+	@Test
+	public void output_format_test3() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 10000, 6000, 15, 10, 2000);
+		temp.calculation();
+		String[] actual = temp.formattedOutput();
+		String[] expected = {"1000","0","1000","10922","72.81"};
+		for (int i = 0; i < 5; i++) {
+			assertEquals(actual[i], expected[i]);			
+		}
+	}
+	@Test
+	public void output_format_test4() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 1000, 1000, 100, 100, 0);
+		temp.calculation();
+		String[] actual = temp.formattedOutput();
+		String[] expected = {"154","19","173","16885","97.60"};
+		for (int i = 0; i < 5; i++) {
+			assertEquals(actual[i], expected[i]);			
+		}
+	}
+	@Test
+	public void output_format_test5() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 111, 111, 11, 1, 0);
+		temp.calculation();
+		String[] actual = temp.formattedOutput();
+		String[] expected = {"18","0","18","160","80.81"};
+		for (int i = 0; i < 5; i++) {
+			assertEquals(actual[i], expected[i]);			
+		}
+	}
+	
 }
