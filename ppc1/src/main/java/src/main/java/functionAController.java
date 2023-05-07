@@ -144,190 +144,179 @@ public class functionAController {
     	Num_Week.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Num_Week.getText() == null || Num_Week.getText().trim().isEmpty()) {
                 			Num_Week.setText("");
                 		} else {
                 			if (0 > Integer.parseInt(Num_Week.getText()) || 15 < Integer.parseInt(Num_Week.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0 and less than 15");
-    	                        alert.showAndWait();
-    	                        Num_Week.setText("");
+    	                        warning = true;
     	                    } else {
     	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0 and less than 15");
-                    alert.showAndWait();
-                    Num_Week.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 15");
+            		alert.showAndWait();
+            		Num_Week.setText("");	
                 }
             }
         });
     	Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
                 			Cap_Labor.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Labor.getText()) || 99999999 < Integer.parseInt(Cap_Labor.getText()) ) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Cap_Labor.setText("");
+                			if (0 > Integer.parseInt(Cap_Labor.getText()) || 100000000 < Integer.parseInt(Cap_Labor.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Cap_Labor.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Cap_Labor.setText("");	
                 }
             }
         });
     	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Cap_Grape.getText() == null || Cap_Grape.getText().trim().isEmpty()) {
                 			Cap_Grape.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Grape.getText()) || 99999999 < Integer.parseInt(Cap_Grape.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Cap_Grape.setText("");
+                			if (0 > Integer.parseInt(Cap_Grape.getText()) || 100000000 < Integer.parseInt(Cap_Grape.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Cap_Grape.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Cap_Grape.setText("");	
                 }
             }
         });
     	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Prc_Rose.getText() == null || Prc_Rose.getText().trim().isEmpty()) {
                 			Prc_Rose.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Rose.getText()) || 10000 < Double.parseDouble(Prc_Rose.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
-    	                        alert.showAndWait();
-    	                        Prc_Rose.setText("");
+                			if (0 > Integer.parseInt(Prc_Rose.getText()) || 10000 < Integer.parseInt(Prc_Rose.getText())) {
+    	                        warning = true;
     	                    } else {
-    	                    	Prc_Rose.setText(String.format("%.2f", Double.parseDouble(Prc_Rose.getText())));
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter a number in range of 0 to 10000");
-                    alert.showAndWait();
-                    Prc_Rose.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 10000");
+            		alert.showAndWait();
+            		Prc_Rose.setText("");	
                 }
             }
         });
     	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Prc_Noir.getText() == null || Prc_Noir.getText().trim().isEmpty()) {
                 			Prc_Noir.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Noir.getText()) || 10000 < Double.parseDouble(Prc_Noir.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
-    	                        alert.showAndWait();
-    	                        Prc_Noir.setText("");
+                			if (0 > Integer.parseInt(Prc_Noir.getText()) || 10000 < Integer.parseInt(Prc_Noir.getText())) {
+    	                        warning = true;
     	                    } else {
-    	                    	Prc_Noir.setText(String.format("%.2f", Double.parseDouble(Prc_Rose.getText())));
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter a number in range of 0 to 10000");
-                    alert.showAndWait();
-                    Prc_Noir.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 10000");
+            		alert.showAndWait();
+            		Prc_Noir.setText("");	
                 }
             }
         });
     	Fixed_Costs.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
-                		if (Fixed_Costs.getText() == null || 99999999 < Integer.parseInt(Fixed_Costs.getText())) {
+                		if (Fixed_Costs.getText() == null || Fixed_Costs.getText().trim().isEmpty()) {
                 			Fixed_Costs.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Fixed_Costs.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Fixed_Costs.setText("");
+                			if (0 > Integer.parseInt(Fixed_Costs.getText()) || 100000000 < Integer.parseInt(Fixed_Costs.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Fixed_Costs.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Fixed_Costs.setText("");	
                 }
             }
         });
     }
+
     
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
