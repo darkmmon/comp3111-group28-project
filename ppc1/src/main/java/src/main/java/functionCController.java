@@ -12,7 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import java.text.DecimalFormat;
 
-
+/**
+ * Controller for function C - Weekly Review by Revenue & Backorders
+ * @author WONG Chak Ming 20713859
+ *
+ */
 public class functionCController {
 
     @FXML

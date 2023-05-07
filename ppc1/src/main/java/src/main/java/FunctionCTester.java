@@ -195,4 +195,50 @@ public class FunctionCTester {
 			assertEquals(actual[i], expected[i]);			
 		}
 	}
+	@Test
+    public void output_format_test2() {
+        functionCController temp = new functionCController();
+        temp.testInput(2301, 10000, 10000, 15, 30, 80, 80);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"1452","115","1567","25230","YES"};
+        for (int i = 0; i < 5; i++) {
+            assertEquals(actual[i], expected[i]);            
+        }
+    }
+    @Test
+    public void output_format_test3() {
+        functionCController temp = new functionCController();
+        temp.testInput(2301, 10000, 10000, 50, 30, 8000, 8000);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"1666","1","1667","83330","NO"};
+        //int[] expected = {615,577,1192,26535};
+        for (int i = 0; i < 5; i++) {
+            assertEquals(actual[i], expected[i]);            
+        }
+    }
+    @Test
+    public void output_format_test4() {
+        functionCController temp = new functionCController();
+        //temp.testInput(2301, 10000, 10000, 15, 10);
+        temp.testInput(2301, 10000, 10000, 15, 10, 10, 10);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"1530","180","1710","24750","YES"};
+        for (int i = 0; i < 5; i++) {
+            assertEquals(actual[i], expected[i]);
+        }
+    };
+    @Test
+    public void output_format_test5() {
+        functionCController temp = new functionCController();
+        temp.testInput(2301, 100, 100, 0, 0, 200, 200);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"0","0","0","0","NO"};
+        for (int i = 0; i < 5; i++) {
+            assertEquals(actual[i], expected[i]);
+        }
+    }
 }
