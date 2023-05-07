@@ -145,7 +145,7 @@
             <Label fx:id="opt_r_caption2" layoutX="484.0" layoutY="220.0" text="Sales Revenue (A$):" />
             <Label fx:id="opt_r_caption3" layoutX="486.0" layoutY="259.0" text="Surplus of Labor (Minutes):" />
             <Label fx:id="opt_r_caption4" layoutX="486.0" layoutY="287.0" text="Surplus of Grape (Kgs):" />
-            <TextField fx:id="or_Gross_Profit" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="215.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
+            <TextField fx:id="or_Revenue" accessibleRole="TEXT" alignment="CENTER_RIGHT" editable="false" layoutX="635.0" layoutY="215.0" opacity="0.84" prefHeight="25.0" prefWidth="99.0" promptText="999,999" style="-fx-background-color: grey;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

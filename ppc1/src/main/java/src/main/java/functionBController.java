@@ -113,7 +113,7 @@ public class functionBController {
     private Label opt_result_heading1;
 
     @FXML
-    private TextField or_Gross_Profit;
+    private TextField or_Revenue;
 
     @FXML
     private TextField or_Prod_Vol_Noir;
@@ -162,7 +162,6 @@ public class functionBController {
     	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -174,49 +173,61 @@ public class functionBController {
                 }
             }
         });
-        Cap_Labor.textProperty().addListener(new ChangeListener<String>() { // Cap_Labor validation
+        Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() { // Cap_Labor validation
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue)) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0");
-                        alert.showAndWait();
-                        Cap_Labor.setText("");
-                    } else {
-
-                    }
+                	if (!newValue) {
+                		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
+                			Cap_Labor.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Cap_Labor.getText()) || 99999999 < Integer.parseInt(Cap_Labor.getText())) {
+    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	                        alert.setTitle("error");
+    	                        alert.setHeaderText("input error");
+    	                        alert.setContentText("Please enter an integer greater than 0 and less than 100,000,000");
+    	                        alert.showAndWait();
+    	                        Cap_Labor.setText("");
+    	                    } else {
+    	
+    	                    }
+                		}
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter the number greater than 0 and less than 100,000,000");
                     alert.showAndWait();
                     Cap_Labor.setText("");
                 }
             }
         });
-        Cap_Grape.textProperty().addListener(new ChangeListener<String>() { // Cap_Grape validation
+        Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() { // Cap_Grape validation
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
-                    if (0 > Integer.parseInt(newValue)) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText("input error");
-                        alert.setContentText("Please enter an integer greater than 0");
-                        alert.showAndWait();
-                        Cap_Grape.setText("");
-                    } else {
+                	if (!newValue) {
+                		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
+                			Cap_Labor.setText("");
+                		} else {
+                			if (0 > Integer.parseInt(Cap_Grape.getText()) || 99999999 < Integer.parseInt(Cap_Grape.getText())) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText("input error");
+                                alert.setContentText("Please enter an integer greater than 0 and less than 100,000,000");
+                                alert.showAndWait();
+                                Cap_Grape.setText("");
+                            } else {
 
-                    }
+                            }
+                		}
+                	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter the number greater than 0 and less than 100,000,000");
                     alert.showAndWait();
                     Cap_Grape.setText("");
                 }
@@ -230,11 +241,11 @@ public class functionBController {
                     	if (Prc_Rose.getText() == null || Prc_Rose.getText().trim().isEmpty()) {
                     		
                     	} else {
-	                    	if (0 > Double.parseDouble(Prc_Rose.getText())) {
+	                    	if (0 > Double.parseDouble(Prc_Rose.getText()) || 10000 < Double.parseDouble(Prc_Rose.getText())) {
 	                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	                            alert.setTitle("error");
 	                            alert.setHeaderText("input error");
-	                            alert.setContentText("Please enter a decimal number greater than 0");
+	                            alert.setContentText("Please enter a decimal number greater than 0 and less than 10,000");
 	                            alert.showAndWait();
 	                            Prc_Rose.setText("");
 	                        } else {
@@ -246,7 +257,7 @@ public class functionBController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter the number greater than 0 and less than 10,000");
                     alert.showAndWait();
                     Prc_Rose.setText("");
                 }
@@ -260,11 +271,11 @@ public class functionBController {
                     	if (Prc_Noir.getText() == null || Prc_Noir.getText().trim().isEmpty()) {
                     		
                     	} else {
-	                    	if (0 > Double.parseDouble(Prc_Rose.getText())) {
+	                    	if (0 > Double.parseDouble(Prc_Noir.getText()) || 10000 < Double.parseDouble(Prc_Noir.getText())) {
 	                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	                            alert.setTitle("error");
 	                            alert.setHeaderText("input error");
-	                            alert.setContentText("Please enter a decimal number greater than 0");
+	                            alert.setContentText("Please enter a decimal number greater than 0 and less than 10,000");
 	                            alert.showAndWait();
 	                            Prc_Noir.setText("");
 	                        } else {
@@ -276,7 +287,7 @@ public class functionBController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
+                    alert.setContentText("Please enter the number greater than 0 and less than 10,000");
                     alert.showAndWait();
                     Prc_Noir.setText("");
                 }
@@ -286,57 +297,140 @@ public class functionBController {
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
 
-   
     }
 
     public void toexit(ActionEvent actionEvent) {Main.stage.setScene(Main.scene);
     }
-
+    
+    public void testInput(int a, int b, int c, double d, double e) {
+    	CapLabor = b;
+    	CapGrape = c;
+    	PrcRose = d;
+    	PrcNoir = e;
+    }
+    
+    public int[] testCalculation() {
+    	int[] output = {0,0,0,0,0,0};
+    	output[0] = Opt_result[0];
+    	output[1] = Opt_result[1];
+    	output[2] = Opt_result[0]+Opt_result[1];
+    	output[3] = Opt_result[2];
+    	output[4] = SurLabor;
+    	output[5] = SurGrape;
+    	return output;
+    }
+    
+    public boolean[] testWarningState() {
+    	boolean[] warningState = {false, false};
+    	if (w1) {
+    		warningState[0] = true;
+    	}
+    	if (w2) {
+    		warningState[1] = true;
+    	}
+    	return warningState;
+    }
+    
+ // global variables
+    private int CapLabor = 0, CapGrape = 0, OptNoir = 0, OptRose = 0, SurLabor = 0, SurGrape = 0;
+    private double PrcRose = 0, PrcNoir = 0;
+    private boolean w1 = false, w2 = false;
+	private int[] Opt_result = {0,0,0};
+	
+	public void calculation() {
+		Opt_result = Solver.Solve_linear(CapLabor, CapGrape, PrcRose, PrcNoir);
+		OptRose = Opt_result[0];
+		OptNoir = Opt_result[1];
+		SurLabor = CapLabor - OptRose * 5 - OptNoir * 12;
+		if (SurLabor < 5) SurLabor = 0;
+		SurGrape = CapGrape - OptRose * 6 - OptNoir * 4;
+		if (SurGrape < 4) SurGrape = 0;
+		
+		w1 = OptRose + OptNoir > 5000;
+		w2 = SurGrape * 100 / CapGrape > 10;
+	}
+	
+	public String[] formattedOutput() {
+		String[] output = {"","","","","",""};
+		output[0] = Integer.toString(Opt_result[0]);
+		output[1] = Integer.toString(Opt_result[1]);
+		output[2] = Integer.toString(Opt_result[0]+Opt_result[1]);
+		output[3] = Integer.toString(Opt_result[2]);
+		output[4] = Integer.toString(SurLabor);
+		output[5] = Integer.toString(SurGrape);
+		return output;
+	}
+	
+	public ObservableList<String> warningText() {
+		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
+        String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
+		
+    	ObservableList<String> items = FXCollections.observableArrayList();
+    	if ( w1 ) {
+    		items.add(W1);
+    	}
+    	if ( w2 ) {
+    		items.add(W2);
+    	}
+    	return items;
+	}
+	
     public void toclick(ActionEvent actionEvent) {
     	
     	// initializing local variables and retrieving input values
-    	double temp_rev = 0.0;
-    	int opt_rose = 0;
-    	int opt_noir = 0;
-    	int labor = Integer.parseInt(Cap_Labor.getText());
-    	int grape = Integer.parseInt(Cap_Grape.getText());
-    	double price_rose = Double.parseDouble(Prc_Rose.getText());
-    	double price_noir = Double.parseDouble(Prc_Noir.getText());
+    	CapLabor = Integer.parseInt(Cap_Labor.getText());
+    	CapGrape = Integer.parseInt(Cap_Grape.getText());
+    	PrcRose = Double.parseDouble(Prc_Rose.getText());
+    	PrcNoir = Double.parseDouble(Prc_Noir.getText());
     	
     	// linear programming
-    	for (int temp_rose = 0; ; temp_rose++ ) {
-    		if (temp_rose * 5 > labor || temp_rose * 6 > grape) break;
-    		for (int temp_noir = 0; ; temp_noir++ ) {
-    			if (temp_rose * 5 + temp_noir * 12 > labor || temp_rose * 6 + temp_noir * 4 > grape) break;
-    			double cur_rev = temp_rose * price_rose + temp_noir * price_noir;
-    			if (cur_rev > temp_rev) {
-    				opt_rose = temp_rose;
-    				opt_noir = temp_noir;
-    				temp_rev = cur_rev;
-    			}
-    		}
-    	}
+    	calculation();
+//    	for (int temp_rose = 0; ; temp_rose++ ) {
+//    		if (temp_rose * 5 > labor || temp_rose * 6 > grape) break;
+//    		for (int temp_noir = 0; ; temp_noir++ ) {
+//    			if (temp_rose * 5 + temp_noir * 12 > labor || temp_rose * 6 + temp_noir * 4 > grape) break;
+//    			double cur_rev = temp_rose * price_rose + temp_noir * price_noir;
+//    			if (cur_rev > temp_rev) {
+//    				opt_rose = temp_rose;
+//    				opt_noir = temp_noir;
+//    				temp_rev = cur_rev;
+//    			}
+//    		}
+//    	}
     	
     	// update output fields
-    	or_Prod_Vol_Rose.setText(Integer.toString(opt_rose));
-		or_Prod_Vol_Noir.setText(Integer.toString(opt_noir));
-		or_Prod_Vol_Total.setText(Integer.toString(opt_rose+opt_noir));
-		or_Gross_Profit.setText(Double.toString(temp_rev));
-		int sur_labor = labor - opt_rose * 5 - opt_noir * 12;
-		if (sur_labor < 5) sur_labor = 0;
-		int sur_grape = grape - opt_rose * 6 - opt_noir * 4;
-		if (sur_grape < 4) sur_grape = 0;
-		or_Sur_Labor.setText(Integer.toString(sur_labor));
-		or_Sur_Grape.setText(Integer.toString(sur_grape));
+    	
+    	String[] output = formattedOutput();
+    	or_Prod_Vol_Rose.setText(output[0]);
+		or_Prod_Vol_Noir.setText(output[1]);
+		or_Prod_Vol_Total.setText(output[2]);
+		or_Revenue.setText(output[3]);
+		or_Sur_Labor.setText(output[4]);
+		or_Sur_Grape.setText(output[5]);
+		
+//    	or_Prod_Vol_Rose.setText(Integer.toString(opt_rose));
+//		or_Prod_Vol_Noir.setText(Integer.toString(opt_noir));
+//		or_Prod_Vol_Total.setText(Integer.toString(opt_rose+opt_noir));
+//		or_Revenue.setText(Double.toString(temp_rev));
+//		int sur_labor = labor - opt_rose * 5 - opt_noir * 12;
+//		if (sur_labor < 5) sur_labor = 0;
+//		int sur_grape = grape - opt_rose * 6 - opt_noir * 4;
+//		if (sur_grape < 4) sur_grape = 0;
+//		or_Sur_Labor.setText(Integer.toString(sur_labor));
+//		or_Sur_Grape.setText(Integer.toString(sur_grape));
 		
 		// 
-        ObservableList<String> items = FXCollections.observableArrayList("");
-        String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
-        String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).";
-        if (opt_rose + opt_noir > 5000) // w1
-        	items.add(W1);
-        if (sur_grape * 100 / grape > 10) // w2
-        	items.add(W2);
+		
+		ObservableList<String> items = warningText();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
+        
+//        ObservableList<String> items = FXCollections.observableArrayList("");
+//        String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
+//        String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%).";
+//        if (opt_rose + opt_noir > 5000) // w1
+//        	items.add(W1);
+//        if (sur_grape * 100 / grape > 10) // w2
+//        	items.add(W2);
+//        or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
     }
 }
