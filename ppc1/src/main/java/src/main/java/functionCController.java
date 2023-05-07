@@ -155,7 +155,6 @@ public class functionCController {
 
     }
     public void initialize() {
-    	
     	WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -219,8 +218,6 @@ public class functionCController {
                 }
             }
         });
-    	
-    	
     	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -252,8 +249,6 @@ public class functionCController {
                 }
             }
         });
-    	
-    	
     	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -285,8 +280,6 @@ public class functionCController {
                 }
             }
         });
-    	
-    	
     	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -306,7 +299,6 @@ public class functionCController {
 
     	                    }
                 		}
-
                 	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -318,7 +310,6 @@ public class functionCController {
                 }
             }
         });
-        
     	
     	Bko_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -543,5 +534,6 @@ public class functionCController {
     	
     	ObservableList<String> items = warningText();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
+    	
     }
 }
