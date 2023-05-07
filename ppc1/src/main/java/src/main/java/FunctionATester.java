@@ -23,6 +23,7 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.0001);
 		}
 	}
+	
 	@Test
 	public void calculationTest2() {
 		functionAController temp = new functionAController();
@@ -45,13 +46,24 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i],0.0001);
 		}
 	}
-	
+	@Test
 	public void calculationTest4() {
 		functionAController temp = new functionAController();
-		temp.testInput(1, 100, 100, 0, 0, 0);
+		temp.testInput(1, 1000, 1000, 100, 100, 0);
 		temp.calculation();
 		double[] actual = temp.testCalculation();
-		double[] expected = {0,0,0,0,0};
+		double[] expected = {154,19,173,16885,97.6012};
+		for (int i = 0; i < 5; i++) {
+			assertEquals(actual[i], expected[i],0.001);
+		}
+	}
+	@Test
+	public void calculationTest5() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 111, 111, 11, 1, 0);
+		temp.calculation();
+		double[] actual = temp.testCalculation();
+		double[] expected = {18,0,18,160,80.8081};
 		for (int i = 0; i < 5; i++) {
 			assertEquals(actual[i], expected[i],0.001);
 		}
@@ -100,9 +112,18 @@ public class FunctionATester {
 			assertEquals(actual[i], expected[i]);
 		}
 	}
-	
 	@Test
 	public void warningTextTest1() {
+		functionAController temp = new functionAController();
+		temp.testInput(1, 100, 100, 10, 10, 1);
+		temp.calculation();
+		ObservableList<String> actual = temp.warningText();
+		ObservableList<String> expected = FXCollections.observableArrayList();
+		assertEquals(actual, expected);
+	}
+	
+	@Test
+	public void warningTextTest2() {
 		functionAController temp = new functionAController();
 		temp.testInput(1, 100000, 100000, 10, 10, 1000);
 		temp.calculation();
@@ -114,7 +135,7 @@ public class FunctionATester {
 	}
 	
 	@Test
-	public void warningTextTest2() {
+	public void warningTextTest3() {
 		functionAController temp = new functionAController();
 		temp.testInput(1, 1000, 100000, 10, 10, 1000);
 		temp.calculation();
@@ -126,7 +147,7 @@ public class FunctionATester {
 	}
 	
 	@Test
-	public void warningTextTest3() {
+	public void warningTextTest4() {
 		functionAController temp = new functionAController();
 		temp.testInput(1, 30000, 100000, 10, 15, 1000);
 		temp.calculation();
