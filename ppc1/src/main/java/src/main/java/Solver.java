@@ -1,5 +1,13 @@
 package src.main.java;
 
+/**
+ * Method for solving optimal solutions
+ * @param Cap_Labor - Input of Labor Capacity
+ * @param Cap_Grape - Input of Grape Capacity
+ * @param Prc_Rose - Price of Rose
+ * @param Prc_Noir - Price of Noir
+ * @return int[] - integer array of [OptRose , OptNoir , MaxRevenue]
+ */
 public class Solver {
 	//return OptRose , OptNoir and max revenue in array in order
 	public static int[] Solve_linear(int Cap_Labor, int Cap_Grape, double Prc_Rose, double Prc_Noir) {
