@@ -14,8 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
 /**
- * Controller for function B - Weekly Review by Revenue
- * @author LEUNG Kam Ming 20863408
+ * Controller for function A - Annual Forecast that concerns Gross Profit
+ * @author Yiu Tin Cheung Ivan 20867789
  *
  */
 public class functionAController {
