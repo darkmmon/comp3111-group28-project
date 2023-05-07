@@ -27,9 +27,6 @@ public class functionCController {
     private TextField Cap_Labor;
 
     @FXML
-    private TextField Fixed_Costs;
-
-    @FXML
     private Line HLine2;
 
     @FXML
@@ -119,10 +116,7 @@ public class functionCController {
     @FXML
     private Label opt_result_heading1;
 
-    @FXML
-    private TextField or_Gross_Profit;
-
-    @FXML
+   @FXML
     private TextField or_Prod_Vol_Noir;
 
     @FXML
@@ -130,9 +124,6 @@ public class functionCController {
 
     @FXML
     private TextField or_Prod_Vol_Total;
-
-    @FXML
-    private TextField or_Profit_Margin;
 
     @FXML
     private Spinner<String> or_scroll_text1;
@@ -152,14 +143,17 @@ public class functionCController {
     @FXML
     private TextField or_Backorder_Fulfilment;
     
-    
-
     @FXML
     void buttonpressed(ActionEvent event) {
 
     }
+    
+    /**
+     * Method to initialize field validation listeners for all input fields
+     */
     public void initialize() {
-    	WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	
+    	WeekOfYear.focusedProperty().addListener(new ChangeListener<Boolean>() { // WeekOfYear validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -191,7 +185,7 @@ public class functionCController {
             }
         });
     	    	
-    	Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() { // Cap_Labor validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -222,7 +216,9 @@ public class functionCController {
                 }
             }
         });
-    	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	
+    	
+    	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() { // Cap_Grape validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -253,7 +249,9 @@ public class functionCController {
                 }
             }
         });
-    	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	
+    	
+    	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() { // Prc_Rose validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -284,7 +282,9 @@ public class functionCController {
                 }
             }
         });
-    	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	
+    	
+    	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() { // Prc_Noir validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -303,6 +303,7 @@ public class functionCController {
 
     	                    }
                 		}
+
                 	}
                 } catch (NumberFormatException e) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -314,8 +315,9 @@ public class functionCController {
                 }
             }
         });
+        
     	
-    	Bko_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	Bko_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() { // Bko_Rose validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -348,7 +350,7 @@ public class functionCController {
         });
         
         
-    	Bko_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    	Bko_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() { // Bko_Noir validation
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -391,6 +393,16 @@ public class functionCController {
     	Main.stage.setScene(Main.scene);
     }
     
+    /**
+     * Testing method to pass inputs to other methods without user input
+     * @param a WeekOfYear - Week of the harvest year (Not being used in calculation)
+     * @param b CapLabor - Labor Capacity (accepts positive int)
+     * @param c CapGrape - Grape Capacity (accepts positive int)
+     * @param d PrcRose - Unit Price of Rose (accepts positive double, corrected to 2 decimal places)
+     * @param e PrcNoir - Unit Price of Noir (accepts positive double, corrected to 2 decimal places)
+     * @param f BkoRose - Backorder volume of Rose (accepts positive int)
+     * @param g BkoNoir - Backorder volume of Noir (accepts positive int)
+     */
     public void testInput(int a, int b, int c, double d, double e, int f, int g) {
     	CapLabor = b;
     	CapGrape = c;
@@ -400,6 +412,10 @@ public class functionCController {
     	BkoNoir = g;
     }
     
+    /**
+     * Testing method to return output from linear programming method in Solver.java
+     * @return an array of outputs: [OptRose, OptNoir, OptTotal, Revenue]
+     */
     public double[] testCalculation() {
     	double[] output = {0, 0, 0, 0};
     	output[0] = Opt_result[0];
@@ -408,6 +424,10 @@ public class functionCController {
     	output[3] = Opt_result[2];
     	return output;
     }
+    /**
+     * Testing method to return output from linear programming method in Solver.java
+     * @return an String of Backorder Fulfillment ("YES"/"NO")
+     */
     public String testBkoFulfill() {
     	String output = "";
 		if (BkoFulfill) {
@@ -417,6 +437,11 @@ public class functionCController {
     	}
     	return output;
     }
+    
+    /**
+     * Testing method to return warning states
+     * @return array of booleans: [w1, w2, w3] corresponding to warning states 1, 2 and 3
+     */
     public boolean[] testWarningState() {
     	boolean[] warningState = {false, false, false};
     	if (w1) {
@@ -431,12 +456,16 @@ public class functionCController {
     	return warningState;
     }
     
+    // global variables
     private int CapLabor = 0, CapGrape = 0, OptNoir = 0, OptRose = 0, BkoRose = 0, BkoNoir = 0;
     private double PrcRose = 0, PrcNoir = 0;
     private boolean w1 = false, w2 = false, w3 = false;
     private boolean BkoFulfill = false;
     private int[] Opt_result = {0,0,0};
     
+    /**
+	 * Method to call solver and store outputs in array Opt_result
+	 */
     public void calculation() {
 		int BkoRoseLabor = BkoRose * 5;		//5 mins of labor per L
     	int BkoNoirLabor = BkoNoir * 12;	//12 mins of labor per L
@@ -482,6 +511,10 @@ public class functionCController {
     	w3 = BkoRose + BkoNoir < ( OptRose + OptNoir ) * 0.7;
 	}
     
+    /**
+	 * Method to convert output values to strings
+	 * @return array of String: [OptRose, OptNoir, OptTotal, Revenue, BkoFulfill]
+	 */
     public String[] formattedOutput() {
     	final DecimalFormat zero_dp = new DecimalFormat("#");
     	String[] output = {"","","","",""};
@@ -497,6 +530,10 @@ public class functionCController {
     	return output;
     }
     
+    /**
+	 * Adds warning messages according to warning states [w1, w2, w3]
+	 * @return Observable List of warning message Strings
+	 */
     public ObservableList<String> warningText(){
     	String W1 = "W1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volum!";
 		String W2 = "W2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
@@ -517,27 +554,36 @@ public class functionCController {
     	}
     	return items;
 	}
-
+    
+    /**
+	 * Method when "Run" button is clicked in the UI.
+	 * retrieves values from inputs, calls calculation method, stores output values in output fields, and
+	 * show corresponding warnings.
+	 * @param actionEvent When user clicks the "Run" button
+	 */
     public void toclick(ActionEvent actionEvent) {
-           	
+        
+    	// initializing local variables and retrieving input values
     	CapLabor = Integer.parseInt(Cap_Labor.getText());		//Labor resource planned for the production cycle (min)
     	CapGrape = Integer.parseInt(Cap_Grape.getText());		//Grape resource planned for the production cycle (kg)
     	PrcRose = Double.parseDouble(Prc_Rose.getText());		//Price of Rose (A$)
     	PrcNoir = Double.parseDouble(Prc_Noir.getText());		//Price of Noir (A$)
-    	BkoRose = Integer.parseInt(Bko_Rose.getText());		//Backorder volume of Rosé (L)
-    	BkoNoir = Integer.parseInt(Bko_Noir.getText());		//Backorder volume of Noir (L)
+    	BkoRose = Integer.parseInt(Bko_Rose.getText());			//Backorder volume of Rosé (L)
+    	BkoNoir = Integer.parseInt(Bko_Noir.getText());			//Backorder volume of Noir (L)
     	
+    	// linear programming
     	calculation();
-    	String[] output = formattedOutput();    	
     	
+    	// update output fields
+    	String[] output = formattedOutput();
     	or_Prod_Vol_Rose.setText(output[0]);
     	or_Prod_Vol_Noir.setText(output[1]);
     	or_Prod_Vol_Total.setText(output[2]);
     	or_Revenue.setText(output[3]);
     	or_Backorder_Fulfilment.setText(output[4]);
     	
+    	// display warnings
     	ObservableList<String> items = warningText();
         or_scroll_text1.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<String>(items));
-    	
     }
 }
