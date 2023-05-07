@@ -150,4 +150,37 @@ public class FunctionBTester {
 			assertEquals(actual[i], expected[i]);			
 		}
 	}
+	@Test
+    public void output_format_test2() {
+        functionBController temp = new functionBController();
+        temp.testInput(10000, 10000, 15, 10);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"1540","190","1730","25000","20","0"};
+        for (int i = 0; i < 6; i++) {
+            assertEquals(actual[i], expected[i]);
+        }
+    }
+    @Test
+    public void output_format_test3() {
+        functionBController temp = new functionBController();
+        temp.testInput(10000, 6000, 15, 30);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"615", "577", "1192", "26535", "0", "0"};
+        for (int i = 0; i < 6; i++) {
+            assertEquals(actual[i], expected[i]);            
+        }
+    }
+    @Test
+    public void output_format_test4() {
+        functionBController temp = new functionBController();
+        temp.testInput(100, 100, 0, 0);
+        temp.calculation();
+        String[] actual = temp.formattedOutput();
+        String[] expected = {"0", "0", "0", "0", "100", "100"};
+        for (int i = 0; i < 6; i++) {
+            assertEquals(actual[i], expected[i]);            
+        }
+    }
 }
