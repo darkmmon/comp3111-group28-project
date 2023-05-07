@@ -13,6 +13,11 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+/**
+ * Controller for function B - Weekly Review by Revenue
+ * @author LEUNG Kam Ming 20863408
+ *
+ */
 public class functionAController {
 
     @FXML
@@ -139,195 +144,186 @@ public class functionAController {
     void buttonpressed(ActionEvent event) {
     	
     }
-    
+    /**
+     * Method to initialize field validation listeners for all input fields
+     */
     public void initialize() {
     	Num_Week.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Num_Week.getText() == null || Num_Week.getText().trim().isEmpty()) {
                 			Num_Week.setText("");
                 		} else {
                 			if (0 > Integer.parseInt(Num_Week.getText()) || 15 < Integer.parseInt(Num_Week.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0 and less than 15");
-    	                        alert.showAndWait();
-    	                        Num_Week.setText("");
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0 and less than 15");
-                    alert.showAndWait();
-                    Num_Week.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 15");
+            		alert.showAndWait();
+            		Num_Week.setText("");	
                 }
             }
         });
     	Cap_Labor.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Cap_Labor.getText() == null || Cap_Labor.getText().trim().isEmpty()) {
                 			Cap_Labor.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Labor.getText()) ) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Cap_Labor.setText("");
+                			if (0 > Integer.parseInt(Cap_Labor.getText()) || 100000000 < Integer.parseInt(Cap_Labor.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Cap_Labor.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Cap_Labor.setText("");	
                 }
             }
         });
     	Cap_Grape.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Cap_Grape.getText() == null || Cap_Grape.getText().trim().isEmpty()) {
                 			Cap_Grape.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Cap_Grape.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Cap_Grape.setText("");
+                			if (0 > Integer.parseInt(Cap_Grape.getText()) || 100000000 < Integer.parseInt(Cap_Grape.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Cap_Grape.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Cap_Grape.setText("");	
                 }
             }
         });
     	Prc_Rose.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Prc_Rose.getText() == null || Prc_Rose.getText().trim().isEmpty()) {
                 			Prc_Rose.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Rose.getText()) || 10000 < Double.parseDouble(Prc_Rose.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
-    	                        alert.showAndWait();
-    	                        Prc_Rose.setText("");
+                			if (0 > Integer.parseInt(Prc_Rose.getText()) || 10000 < Integer.parseInt(Prc_Rose.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter a number in range of 0 to 10000");
-                    alert.showAndWait();
-                    Prc_Rose.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 10000");
+            		alert.showAndWait();
+            		Prc_Rose.setText("");	
                 }
             }
         });
     	Prc_Noir.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Prc_Noir.getText() == null || Prc_Noir.getText().trim().isEmpty()) {
                 			Prc_Noir.setText("");
                 		} else {
-                			if (0 > Double.parseDouble(Prc_Noir.getText()) || 10000 < Double.parseDouble(Prc_Noir.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter a number in range of 0 to 10000");
-    	                        alert.showAndWait();
-    	                        Prc_Noir.setText("");
+                			if (0 > Integer.parseInt(Prc_Noir.getText()) || 10000 < Integer.parseInt(Prc_Noir.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter a number in range of 0 to 10000");
-                    alert.showAndWait();
-                    Prc_Noir.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 10000");
+            		alert.showAndWait();
+            		Prc_Noir.setText("");	
                 }
             }
         });
     	Fixed_Costs.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
+            	boolean warning= false;
+            	try {
                 	if (!newValue) {
                 		if (Fixed_Costs.getText() == null || Fixed_Costs.getText().trim().isEmpty()) {
                 			Fixed_Costs.setText("");
                 		} else {
-                			if (0 > Integer.parseInt(Fixed_Costs.getText())) {
-    	                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    	                        alert.setTitle("error");
-    	                        alert.setHeaderText("input error");
-    	                        alert.setContentText("Please enter an integer greater than 0");
-    	                        alert.showAndWait();
-    	                        Fixed_Costs.setText("");
+                			if (0 > Integer.parseInt(Fixed_Costs.getText()) || 100000000 < Integer.parseInt(Fixed_Costs.getText())) {
+    	                        warning = true;
     	                    } else {
-    	
+    	                    	
     	                    }
                 		}
-	                    
                 	}
                 } catch (NumberFormatException e) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("error");
-                    alert.setHeaderText("input error");
-                    alert.setContentText("Please enter the number greater than 0");
-                    alert.showAndWait();
-                    Fixed_Costs.setText("");
+                    warning = true;
+                }
+            	if (warning){
+            		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            		alert.setTitle("error");
+            		alert.setHeaderText("input error");
+            		alert.setContentText("Please enter the number greater than 1 and less than 100,000,000");
+            		alert.showAndWait();
+            		Fixed_Costs.setText("");	
                 }
             }
         });
     }
+
     
     @FXML
     private void getDefaultValue(InputMethodEvent event) {
@@ -340,6 +336,17 @@ public class functionAController {
     	Main.stage.setScene(Main.scene);
     }
     
+    /**
+     * Testing method to pass inputs to other methods without user input
+     * @param a NumWeek - Number of Week (accepts 1-15)
+     * @param b CapLabor - Labor Capacity (accepts positive int)
+     * @param c CapGrape - Grape Capacity (accepts positive int)
+     * @param d PrcRose - Unit Price of Rose (accepts positive double, corrected to 2 decimal places)
+     * @param e PrcNoir - Unit Price of Noir (accepts positive double, corrected to 2 decimal places)
+     * @param f FixedCost - Fixed Cost of the entire production (accept positive int)
+     *
+     */
+    
     public void testInput(int a, int b, int c, double d, double e, int f) {
     	NumWeek = a;
     	CapLabor = b;
@@ -348,7 +355,10 @@ public class functionAController {
     	PrcNoir = e;
     	FixedCost = f;
     }
-    
+    /**
+     * Testing method to return output from linear programming method in Solver.java
+     * @return an array of outputs: [OptRose, OptNoir, OptTotal, GrossProfit, ProfitMargin]
+     */
     public double[] testCalculation() {
     	double[] output = {0,0,0,0,0};
     	output[0] = Opt_result[0];
@@ -359,6 +369,10 @@ public class functionAController {
     	return output;
     }
     
+    /**
+     * Testing method to return warning states
+     * @return array of booleans: [w1, w2] corresponding to warning states 1 and 2
+     */
     public boolean[] testWarningState() {
     	boolean[] warningState = {false, false};
     	if (w1) {
@@ -376,7 +390,10 @@ public class functionAController {
     private boolean w1 = false, w2 = false;
     private double ProfitMargin = 0;
 	private int[] Opt_result = {0,0,0};
-
+	
+	/**
+	 * Method to call solver and store outputs in array Opt_result
+	 */
 	public void calculation() {
 		double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
     	double ProfitNoir = PrcNoir - 12 * 935 / (37.5*60);
@@ -389,6 +406,10 @@ public class functionAController {
     	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
 	}
 	
+	/**
+	 * Method to convert output values to strings
+	 * @return array of String: [OptRose, OptNoir, OptTotal, GrossProfit, ProfitMargin]
+	 */
 	public String[] formattedOutput() {
 		final DecimalFormat zero_dp = new DecimalFormat("#");
 		final DecimalFormat one_dp = new DecimalFormat("00.00");
@@ -400,7 +421,10 @@ public class functionAController {
 		output[4] = one_dp.format(ProfitMargin);
 		return output;
 	}
-	
+	/**
+	 * Adds warning messages according to warning states [w1, w2]
+	 * @return Observable List of warning message Strings
+	 */
 	public ObservableList<String> warningText(){
 		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
 		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
@@ -415,6 +439,12 @@ public class functionAController {
     	return items;
 	}
 	
+	/**
+	 * Method when "Run" button is clicked in the UI.
+	 * retrieves values from inputs, calls calculation method, stores output values in output fields, and
+	 * show corresponding warnings.
+	 * @param actionEvent When user clicks the "Run" button
+	 */
     public void toclick(ActionEvent actionEvent) {
     	//declare variables
 
