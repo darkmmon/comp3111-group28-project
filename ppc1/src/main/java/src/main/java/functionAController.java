@@ -13,6 +13,11 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 
+/**
+ * Controller for function B - Weekly Review by Revenue
+ * @author LEUNG Kam Ming 20863408
+ *
+ */
 public class functionAController {
 
     @FXML
@@ -139,7 +144,9 @@ public class functionAController {
     void buttonpressed(ActionEvent event) {
     	
     }
-    
+    /**
+     * Method to initialize field validation listeners for all input fields
+     */
     public void initialize() {
     	Num_Week.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -329,6 +336,17 @@ public class functionAController {
     	Main.stage.setScene(Main.scene);
     }
     
+    /**
+     * Testing method to pass inputs to other methods without user input
+     * @param a NumWeek - Number of Week (accepts 1-15)
+     * @param b CapLabor - Labor Capacity (accepts positive int)
+     * @param c CapGrape - Grape Capacity (accepts positive int)
+     * @param d PrcRose - Unit Price of Rose (accepts positive double, corrected to 2 decimal places)
+     * @param e PrcNoir - Unit Price of Noir (accepts positive double, corrected to 2 decimal places)
+     * @param f FixedCost - Fixed Cost of the entire production (accept positive int)
+     *
+     */
+    
     public void testInput(int a, int b, int c, double d, double e, int f) {
     	NumWeek = a;
     	CapLabor = b;
@@ -337,7 +355,10 @@ public class functionAController {
     	PrcNoir = e;
     	FixedCost = f;
     }
-    
+    /**
+     * Testing method to return output from linear programming method in Solver.java
+     * @return an array of outputs: [OptRose, OptNoir, OptTotal, GrossProfit, ProfitMargin]
+     */
     public double[] testCalculation() {
     	double[] output = {0,0,0,0,0};
     	output[0] = Opt_result[0];
@@ -348,6 +369,10 @@ public class functionAController {
     	return output;
     }
     
+    /**
+     * Testing method to return warning states
+     * @return array of booleans: [w1, w2] corresponding to warning states 1 and 2
+     */
     public boolean[] testWarningState() {
     	boolean[] warningState = {false, false};
     	if (w1) {
@@ -365,7 +390,10 @@ public class functionAController {
     private boolean w1 = false, w2 = false;
     private double ProfitMargin = 0;
 	private int[] Opt_result = {0,0,0};
-
+	
+	/**
+	 * Method to call solver and store outputs in array Opt_result
+	 */
 	public void calculation() {
 		double ProfitRose = PrcRose - 5 * 935 / (37.5*60);
     	double ProfitNoir = PrcNoir - 12 * 935 / (37.5*60);
@@ -378,6 +406,10 @@ public class functionAController {
     	w2 = (Opt_result[0] * 6 + Opt_result[1] * 4) * 100 / CapGrape < 90;
 	}
 	
+	/**
+	 * Method to convert output values to strings
+	 * @return array of String: [OptRose, OptNoir, OptTotal, GrossProfit, ProfitMargin]
+	 */
 	public String[] formattedOutput() {
 		final DecimalFormat zero_dp = new DecimalFormat("#");
 		final DecimalFormat one_dp = new DecimalFormat("00.00");
@@ -389,7 +421,10 @@ public class functionAController {
 		output[4] = one_dp.format(ProfitMargin);
 		return output;
 	}
-	
+	/**
+	 * Adds warning messages according to warning states [w1, w2]
+	 * @return Observable List of warning message Strings
+	 */
 	public ObservableList<String> warningText(){
 		String W1 = "w1: Insufficient production capacity to produce the optimal mix, please reduce or adjust the capacity of labor & grape volume!";
 		String W2 = "w2: Insufficient labor supplied to utilize the grape resource (less than 90%)!";
@@ -404,6 +439,12 @@ public class functionAController {
     	return items;
 	}
 	
+	/**
+	 * Method when "Run" button is clicked in the UI.
+	 * retrieves values from inputs, calls calculation method, stores output values in output fields, and
+	 * show corresponding warnings.
+	 * @param actionEvent When user clicks the "Run" button
+	 */
     public void toclick(ActionEvent actionEvent) {
     	//declare variables
 
